@@ -62,3 +62,9 @@ a.side_bar_link {
 .button_agregar {
     margin-top: 30px;
 }
+
+/* Agregar Album -> /musica/agregar */
+
+.contenedor-registro-albums {
+    margin-top: 150px;
+}
