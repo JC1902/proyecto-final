@@ -8,6 +8,7 @@ import Registro from '@/components/Registro';
 import Login from '@/components/Login';
 
 import Musica from '@/components/Musica';
+import AgregarAlbum from '@/components/AgregarAlbum';
 
 Vue.use(Router);
 
@@ -48,6 +49,12 @@ export default new Router({
       path: '/musica',
       name: 'Musica',
       component: Musica,
+    },
+
+    {
+      path: '/musica/agregar',
+      name: 'AgregarAlbum',
+      component: AgregarAlbum,
     },
   ],
 });
