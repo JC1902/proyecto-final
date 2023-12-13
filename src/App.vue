@@ -13,15 +13,12 @@
         </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="indigo" dark fixes app>
+    <v-app-bar color="#FF9FF0" dark fixes app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>{{drawer ? 'close' : 'menu'}}</v-icon>
       </v-app-bar-nav-icon>
       <v-app-bar-title>GameVibe</v-app-bar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn v-bind:to="{name: 'AgregarPelicula'}">Agregar Película</v-btn>
-      </v-toolbar-items>
     </v-app-bar>
 
     <v-main>
