@@ -87,7 +87,7 @@
           </v-list-item>
         </router-link>
 
-        <router-link v-bind:to="{name: 'Inicio'}" class="side_bar_link">
+        <router-link v-bind:to="{name: 'Musica'}" class="side_bar_link">
           <v-list-item>
             <v-list-item-action>
               <v-icon>mdi-music-box-multiple</v-icon>
