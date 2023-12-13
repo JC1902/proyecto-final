@@ -28,8 +28,9 @@
     <v-btn
      @click="enviar"
      :disabled="!valido"
+     color="success"
     >Enviar</v-btn>
-    <v-btn @click="limpiar">Limpiar</v-btn>
+    <v-btn @click="limpiar" color="warning">Limpiar</v-btn>
   </v-form>
 </template>
 
@@ -49,7 +50,7 @@ export default {
     ],
     reglasContra: [
       v => !!v || 'La contraseña no puede estar vacía',
-      v => v < 8 || 'La contraseña debe tener 8 o más caracteres',
+      v => v.length > 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
   methods: {

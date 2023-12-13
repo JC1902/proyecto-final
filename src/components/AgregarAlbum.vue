@@ -12,7 +12,7 @@
             multi-line
         ></v-text-field>
 
-        <v-item-group>    
+        <v-item-group>
           <v-row>
             <v-col>
               <v-text-field
@@ -43,7 +43,7 @@
                 :items="anhos"
             ></v-text-field>
             </v-col>
-          </v-row>    
+          </v-row>
       </v-item-group>
         <v-text-field
             label="Género:"

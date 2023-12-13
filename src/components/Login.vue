@@ -10,13 +10,19 @@
      label="Contraseña"
      v-model="contrasenha"
      type="password"
+     :rules="reglasContra"
      required
     ></v-text-field>
     <v-btn
      @click="entrar"
      :disabled="!valido"
+     color="success"
     >Entrar</v-btn>
-    <v-btn @click="limpar">Limpiar</v-btn>
+    <v-btn @click="limpar" color="warning">Limpiar</v-btn>
+
+    <v-spacer class="mb-4"></v-spacer>
+
+    <v-btn v-bind:to="{name: 'Registro'}" color="error">No tienes una cuenta? Registrate</v-btn>
   </v-form>
 </template>
 
@@ -31,6 +37,10 @@ export default {
     reglasEmail: [
       v => !!v || 'Email requerido',
       v => /\S+@\S+\.\S+/.test(v) || 'Email debe ser válido',
+    ],
+    reglasContra: [
+      v => !!v || 'La contraseña no puede estar vacía',
+      v => v.length >= 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
   methods: {

@@ -36,7 +36,7 @@
       dark
       shrink-on-scroll
       prominent
-      src="./assets/images/gamevibe.png"
+      src="https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/portals_3/SI_Hub_Zelda_Portal_image1280w.jpg"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-3"
     >
@@ -51,9 +51,15 @@
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
 
-      <v-app-bar-title>GameVibe</v-app-bar-title>
+      <v-app-bar-title class="font-weight-bold">GameVibe</v-app-bar-title>
 
       <v-spacer></v-spacer>
+      
+      <v-btn 
+        v-bind:to="{name: 'Login'}"
+        rounded
+        color="#81D4FA"
+      >Login</v-btn>
     </v-app-bar>
     <v-spacer class="mb-4"></v-spacer>
 
