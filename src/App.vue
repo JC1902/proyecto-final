@@ -10,23 +10,6 @@
             <v-list-item-content>Inicio</v-list-item-content>
           </v-list-item>
         </router-link>
-
-        <router-link v-bind:to="{name: 'Contacto'}" class="side_bar_link">
-          <v-list-item>
-            <v-list-item-action>
-              <v-icon>contact_mail</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>Contacto</v-list-item-content>
-          </v-list-item>
-        </router-link>
-
-        <router-link v-bind:to="{name: 'Registro'}" class="side_bar_link">
-          <v-list-item>
-            <v-list-item-action>
-
-            </v-list-item-action>
-          </v-list-item>
-        </router-link>
         </v-list>
     </v-navigation-drawer>
 
@@ -34,7 +17,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>{{drawer ? 'close' : 'menu'}}</v-icon>
       </v-app-bar-nav-icon>
-      <v-app-bar-title>Inicio</v-app-bar-title>
+      <v-app-bar-title>GameVibe</v-app-bar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-bind:to="{name: 'AgregarPelicula'}">Agregar Película</v-btn>
