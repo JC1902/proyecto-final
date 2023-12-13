@@ -25,7 +25,7 @@
             <v-spacer></v-spacer>
           </v-column>
           <v-column>
-            <v-date-picker 
+            <v-date-picker
               v-model="picker"
               color="pink accent-1"></v-date-picker>
           </v-column>
@@ -51,7 +51,8 @@ export default {
     valido: true,
     nombre: '',
     artista: '',
-    picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+    picker: (
+      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().substr(0, 10),
     genero: '',
     anhopub: '',
     reglasNombre: [

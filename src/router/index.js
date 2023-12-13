@@ -9,6 +9,7 @@ import Login from '@/components/Login';
 
 import Musica from '@/components/Musica';
 import AgregarAlbum from '@/components/AgregarAlbum';
+import Videojuegos from '@/components/Videojuegos';
 
 Vue.use(Router);
 
@@ -50,11 +51,15 @@ export default new Router({
       name: 'Musica',
       component: Musica,
     },
-
     {
       path: '/musica/agregar',
       name: 'AgregarAlbum',
       component: AgregarAlbum,
+    },
+    {
+      path: '/videojuegos',
+      name: 'Videojuegos',
+      component: Videojuegos,
     },
   ],
 });
