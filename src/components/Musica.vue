@@ -6,6 +6,11 @@
         <div class="overlay">{{ item.group }}</div>
       </v-carousel-item>
     </v-carousel>
+    <div class="button_agregar" v-bind:to="'/musica/agregar'">
+      <v-btn class="ma-2" outlined color="indigo">
+      Agregar un album
+    </v-btn>
+    </div>
   </v-flex>
 </template>
 
