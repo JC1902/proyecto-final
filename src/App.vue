@@ -65,7 +65,7 @@
 
   </v-app>
 </template> -->
-<template>
+<template id="#scrolling-techniques-3">
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" absolute bottom temporary app>
         <v-list dense>
@@ -103,7 +103,7 @@
       dark
       shrink-on-scroll
       prominent
-      src="https://picsum.photos/1920/1080?random"
+      src="./assets/images/gamevibe.png"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-3"
     >
@@ -123,6 +123,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-spacer class="mb-4"></v-spacer>
+
     <v-main>
      <v-container fluid>
        <div id="app">
@@ -130,6 +131,7 @@
        </div>
      </v-container>
     </v-main>
+
     <v-footer color="#FF9FF0" app>
       <span class="black--text">&copy; 2023</span>
     </v-footer>
