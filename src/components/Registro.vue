@@ -14,6 +14,8 @@
     <v-text-field
      label="Contraseña"
      v-model="contrasenha"
+     :counter="8"
+     :rules="reglasContra"
      required
      type="password"
     ></v-text-field>
@@ -44,6 +46,10 @@ export default {
     reglasEmail: [
       v => !!v || 'Email requerido',
       v => /\S+@\S+\./.test(v) || 'El email debe ser válido',
+    ],
+    reglasContra: [
+      v => !!v || 'La contraseña no puede estar vacía',
+      v => v < 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
   methods: {
