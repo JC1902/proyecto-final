@@ -23,7 +23,7 @@ app.use(cors());
 app.use(passport.initialize());
 
 // conexión a mongodb
-mongoose.connect('mongodb://localhost/calif_peliculas_ad2023').then( () => {
+mongoose.connect('mongodb://localhost/gamevibe').then( () => {
     console.log('Conexion con la base de datos realizada');
 })
 .catch(err => {

@@ -4,11 +4,11 @@ import Inicio from '@/components/Inicio';
 import Contacto from '@/components/Contacto';
 import AgregarPelicula from '@/components/AgregarPelicula';
 import Pelicula from '@/components/Pelicula';
-<<<<<<< HEAD
-=======
 import Registro from '@/components/Registro';
 import Login from '@/components/Login';
->>>>>>> e0502e95cd0d311c05fbb2201737f44b746d47f1
+import AgregarJuego from '@/components/AgregarJuego';
+
+import Videojuego from '@/components/Videojuego';
 
 Vue.use(Router);
 
@@ -35,8 +35,6 @@ export default new Router({
       name: 'Pelicula',
       component: Pelicula,
     },
-<<<<<<< HEAD
-=======
     {
       path: '/usuarios/registro',
       name: 'Registro',
@@ -47,6 +45,15 @@ export default new Router({
       name: 'Login',
       component: Login,
     },
->>>>>>> e0502e95cd0d311c05fbb2201737f44b746d47f1
+    {
+      path: '/videojuegos',
+      name: 'Videojuego',
+      component: Videojuego,
+    },
+    {
+      path: '/videojuegos/agregar',
+      name: 'AgregarJuego',
+      component: AgregarJuego,
+    },
   ],
 });
