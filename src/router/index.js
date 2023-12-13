@@ -7,6 +7,8 @@ import Pelicula from '@/components/Pelicula';
 import Registro from '@/components/Registro';
 import Login from '@/components/Login';
 
+import Musica from '@/components/Musica';
+
 Vue.use(Router);
 
 export default new Router({
@@ -41,6 +43,11 @@ export default new Router({
       path: '/usuarios/login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/musica',
+      name: 'Musica',
+      component: Musica,
     },
   ],
 });
