@@ -12,11 +12,11 @@
     <v-layout row wrap>
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
-          <v-card-title primary-title>
+          <v-card-title primary-title class="d-flex justify-center">
             <div>
               <div class="headline">{{ videojuego.nombre }}</div>
               <div>
-                <v-img src="{{videojuego.imagen}}" class="imagen-juego"></v-img>
+                <img :src="videojuego.imagen" class="imagen-juego">
               </div>
               <span class="grey--text">Año &middot; {{ videojuego.anhopub }}</span>
             </div>
