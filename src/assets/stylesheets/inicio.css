@@ -68,3 +68,9 @@ a.side_bar_link {
 .contenedor-registro-albums {
     margin-top: 150px;
 }
+
+/* Videojuegos */
+.imagen-juego {
+    max-width: 75%;
+    max-height: 75%;
+}

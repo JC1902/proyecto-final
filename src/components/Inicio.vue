@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <v-layout row wrap>
     <v-flex xs4 v-for="pelicula in peliculas" :key="pelicula._id">
       <v-card>
@@ -24,6 +24,36 @@
       </v-card>
     </v-flex>
     <v-btn @click="eliminarPeliculas()" text color="red">Borrar todo</v-btn>
+  </v-layout>
+</template> -->
+
+<template>
+  <v-layout row justify-center align-center>
+    <v-flex xs4>
+      <v-card>
+        <v-card-title primary-title>
+          <div class="headline">Videojuegos</div>
+        </v-card-title>
+        <img src="../assets/images/icono-juegos.png" class="imagen-juego">
+        <v-card-text>
+          <v-btn>Ver Videojuegos</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
+    <v-flex xs12 sm4>
+      <v-card>
+        <v-card-title primary-title>
+          <div>
+            <div class="headline">God of War</div>
+          </div>
+        </v-card-title>
+        <img src="../assets/images/icono-musica.png" class="imagen-juego">
+        <v-card-text>
+          <v-btn>Ver Música</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-flex>
   </v-layout>
 </template>
 
