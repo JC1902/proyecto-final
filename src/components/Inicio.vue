@@ -101,7 +101,7 @@ export default {
         },
       })
         .then((respuesta) => {
-          this.peliculas = respuesta.data.peliculas;
+          this.peliculas = respuesta.data.albumes;
           this.current_user = respuesta.data.current_user;
         })
         .catch(() => {

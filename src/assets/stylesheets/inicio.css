@@ -33,6 +33,22 @@ a.side_bar_link {
 
 /* Musica -> /musica */
 
+.centrar-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.centrar-elementos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .titulo-primario {
     font-size: 40px;
     text-align: left;
@@ -71,6 +87,8 @@ a.side_bar_link {
 
 /* Videojuegos */
 .imagen-juego {
-    max-width: 75%;
-    max-height: 75%;
+    max-width: 40%;
+    max-height: 40%;
+    margin: 20px 0;
 }
+

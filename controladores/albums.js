@@ -11,6 +11,7 @@ module.exports.controller = (app) => {
       artista: req.body.artista,
       picker: req.body.picker,
       genero: req.body.genero,
+      imagen: req.body.imagen,
     });
 
     nuevoAlbum.save()
@@ -18,9 +19,18 @@ module.exports.controller = (app) => {
       if(error) {
         console.log(error);
       }
-      
       res.send(album);
-      
     })
+  });
+
+  // Obtener todos los albumes ,passport.authenticate('jwt', { session: false }),
+  app.get('/musica', (req, res) => {
+    EsquemaAlbum.find({}, 'nombre artista picker genero imagen')
+    .then((albumes) => {
+      res.send(albumes);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   });
 }

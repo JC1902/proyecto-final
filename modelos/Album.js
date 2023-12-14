@@ -6,6 +6,7 @@ const EsquemaAlbum = new Esquema ({
   artista: String,
   genero: String,
   picker: Date,
+  imagen: String,
 });
 
 const Album = mongoose.model('Album', EsquemaAlbum);

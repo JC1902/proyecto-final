@@ -19,6 +19,11 @@
             required
             :rules="reglasGenero"
         ></v-text-field>
+        <v-text-field
+            label="Link de la imagen:"
+            v-model="imagen"
+            required
+        ></v-text-field>
         <v-title>Fecha de lanzamiento:</v-title>
         <v-row justify="center">
           <v-column>
@@ -55,6 +60,7 @@ export default {
     picker: (
       new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().slice(0, 10),
     genero: '',
+    imagen: '',
     reglasNombre: [
       v => !!v || 'El nombre del álbum es obligatorio',
     ],
@@ -77,6 +83,7 @@ export default {
             artista: this.artista,
             picker: this.picker,
             genero: this.genero,
+            imagen: this.imagen,
           },
           url: 'http://localhost:8081/musica',
           headers: {

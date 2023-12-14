@@ -16,7 +16,7 @@
             <div>
               <div class="headline">{{ videojuego.nombre }}</div>
               <div>
-                <v-img src="{{videojuego.imagen}}" class="imagen-juego"></v-img>
+                <v-img :src="videojuego.imagen" class="imagen-juego"></v-img>
               </div>
               <span class="grey--text">Año &middot; {{ videojuego.anhopub }}</span>
             </div>
