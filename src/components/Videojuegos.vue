@@ -12,13 +12,15 @@
     <v-layout row wrap>
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
-          <v-card-title primary-title>
+          <v-card-title primary-title class="d-flex justify-center">
             <div>
               <div class="headline">{{ videojuego.nombre }}</div>
               <div>
                 <v-img :src="videojuego.imagen" class="imagen-juego"></v-img>
               </div>
-              <span class="grey--text">Año &middot; {{ videojuego.anhopub }}</span>
+              <span class="grey--text">
+                {{ formatearFecha(videojuego.anhopub) }} &middot; {{ videojuego.genero }}
+              </span>
             </div>
           </v-card-title>
           <v-card-text>
@@ -82,6 +84,19 @@ export default {
         })
         .catch(() => {
         });
+    },
+    formatearFecha(fecha) {
+      // Crear un objeto Date con la fecha proporcionada
+      const fechaNueva = new Date(fecha);
+
+      // Obtener los componentes individuales de la fecha
+      const dia = fechaNueva.getDate() + 1;
+      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+      const año = fechaNueva.getFullYear();
+
+      // Crear una cadena con el formato día, mes, año
+      const fechaFormateada = `${dia}/${mes}/${año}`;
+      return fechaFormateada;
     },
   },
 };
