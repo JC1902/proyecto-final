@@ -1,0 +1,26 @@
+.card,
+.xs4,
+.v-card {
+    flex-basis: 55.555;
+    height: 100% !important;
+    max-width: 55% !important;
+}
+.texto{
+    margin-right: 2rem;
+    text-align: justify;
+}
+.container{
+    max-width: 90%;
+    padding: inherit;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: left;
+}
+.sombra{
+    box-shadow: 5px 5px 15px gray;
+    border-radius: 1rem;
+}
+.imagen{
+    text-align: right;
+}
+

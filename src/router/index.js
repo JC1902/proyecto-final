@@ -7,9 +7,7 @@ import Pelicula from '@/components/Pelicula';
 import Registro from '@/components/Registro';
 import Login from '@/components/Login';
 import AgregarJuego from '@/components/AgregarJuego';
-
 import Videojuego from '@/components/Videojuego';
-
 import Musica from '@/components/Musica';
 import AgregarAlbum from '@/components/AgregarAlbum';
 
@@ -54,9 +52,16 @@ export default new Router({
       component: Videojuego,
     },
     {
+      path: '/videojuegos/:id',
+      name: 'Videojuego',
+      component: Videojuego,
+    },
+    {
       path: '/videojuegos/agregar',
       name: 'AgregarJuego',
       component: AgregarJuego,
+    },
+    {
       path: '/musica',
       name: 'Musica',
       component: Musica,
