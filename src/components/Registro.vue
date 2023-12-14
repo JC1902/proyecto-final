@@ -14,6 +14,8 @@
     <v-text-field
      label="Contraseña"
      v-model="contrasenha"
+     :counter="8"
+     :rules="reglasContra"
      required
      type="password"
     ></v-text-field>
@@ -26,8 +28,9 @@
     <v-btn
      @click="enviar"
      :disabled="!valido"
+     color="success"
     >Enviar</v-btn>
-    <v-btn @click="limpiar">Limpiar</v-btn>
+    <v-btn @click="limpiar" color="warning">Limpiar</v-btn>
   </v-form>
 </template>
 
@@ -44,6 +47,10 @@ export default {
     reglasEmail: [
       v => !!v || 'Email requerido',
       v => /\S+@\S+\./.test(v) || 'El email debe ser válido',
+    ],
+    reglasContra: [
+      v => !!v || 'La contraseña no puede estar vacía',
+      v => v.length > 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
   methods: {

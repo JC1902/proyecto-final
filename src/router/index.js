@@ -10,6 +10,9 @@ import AgregarJuego from '@/components/AgregarJuego';
 
 import Videojuego from '@/components/Videojuego';
 
+import Musica from '@/components/Musica';
+import AgregarAlbum from '@/components/AgregarAlbum';
+
 Vue.use(Router);
 
 export default new Router({
@@ -54,6 +57,15 @@ export default new Router({
       path: '/videojuegos/agregar',
       name: 'AgregarJuego',
       component: AgregarJuego,
+      path: '/musica',
+      name: 'Musica',
+      component: Musica,
+    },
+
+    {
+      path: '/musica/agregar',
+      name: 'AgregarAlbum',
+      component: AgregarAlbum,
     },
   ],
 });
