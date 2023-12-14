@@ -11,7 +11,7 @@
           </v-list-item>
         </router-link>
 
-        <router-link v-bind:to="{name: 'Inicio'}" class="side_bar_link">
+        <router-link v-bind:to="{name: 'Videojuegos'}" class="side_bar_link">
           <v-list-item>
             <v-list-item-action>
               <v-icon>mdi-nintendo-game-boy</v-icon>
@@ -28,6 +28,15 @@
             <v-list-item-content>Música</v-list-item-content>
           </v-list-item>
         </router-link>
+
+        <router-link v-bind:to="{name: 'SobreNosotros'}" class="side_bar_link">
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon>mdi-account-group-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>Sobre Nosotros</v-list-item-content>
+          </v-list-item>
+        </router-link>
         </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -36,7 +45,7 @@
       dark
       shrink-on-scroll
       prominent
-      src="https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/portals_3/SI_Hub_Zelda_Portal_image1280w.jpg"
+      src="https://i2.wp.com/www.pentamusica.com/wp-content/uploads/2020/09/como-escribir-musica-para-videojuegos_1.png?w=1104&ssl=1"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-3">
       <template v-slot:img="{ props }">
@@ -50,10 +59,11 @@
       </v-app-bar-nav-icon>
       <v-app-bar-title class="font-weight-bold">GameVibe</v-app-bar-title>
       <v-spacer></v-spacer>
-      <v-btn 
+      <v-btn
         v-bind:to="{name: 'Login'}"
         rounded
         color="#81D4FA"
+        class="black--text font-weight-bold"
       >Login</v-btn>
     </v-app-bar>
     <v-spacer class="mb-4"></v-spacer>

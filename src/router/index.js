@@ -1,15 +1,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Inicio from '@/components/Inicio';
-import Contacto from '@/components/Contacto';
+import SobreNosotros from '@/components/SobreNosotros';
 import AgregarPelicula from '@/components/AgregarPelicula';
 import Pelicula from '@/components/Pelicula';
 import Registro from '@/components/Registro';
 import Login from '@/components/Login';
-import AgregarJuego from '@/components/AgregarJuego';
-import Videojuego from '@/components/Videojuego';
+
 import Musica from '@/components/Musica';
 import AgregarAlbum from '@/components/AgregarAlbum';
+import Videojuegos from '@/components/Videojuegos';
+import AgregarJuego from '@/components/AgregarJuego';
+
+import Videojuego from '@/components/Videojuego';
 
 Vue.use(Router);
 
@@ -22,9 +25,9 @@ export default new Router({
       component: Inicio,
     },
     {
-      path: '/contacto',
-      name: 'Contacto',
-      component: Contacto,
+      path: '/sobre-nostros',
+      name: 'SobreNosotros',
+      component: SobreNosotros,
     },
     {
       path: '/peliculas/agregar',
@@ -48,9 +51,9 @@ export default new Router({
     },
     {
       path: '/videojuegos',
-      name: 'Videojuego',
-      component: Videojuego,
-    },
+      name: 'Videojuegos',
+      component: Videojuegos,
+    },    
     {
       path: '/videojuegos/:id',
       name: 'Videojuego',

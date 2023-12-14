@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <v-layout row wrap>
     <v-flex xs4 v-for="pelicula in peliculas" :key="pelicula._id">
       <v-card>
@@ -24,6 +24,54 @@
       </v-card>
     </v-flex>
     <v-btn @click="eliminarPeliculas()" text color="red">Borrar todo</v-btn>
+  </v-layout>
+</template> -->
+
+<template>
+  <v-layout row justify-center align-center>
+    <v-flex xs4>
+      <v-card
+        elevation="24"
+        outlined
+        shaped
+        color="cyan lighten-4"
+      >
+        <v-card-title primary-title class="d-flex justify-center">
+          <div class="headline font-weight-bold">Videojuegos</div>
+        </v-card-title>
+        <img src="../assets/images/icono-juegos.png" class="imagen-juego">
+        <v-card-text>
+          <v-btn
+            rounded
+            color="#AA00FF"
+            class="font-weight-bold white--text"
+            v-bind:to="{name: 'Videojuegos'}"
+          >Ver Videojuegos</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
+    <v-flex xs4>
+      <v-card
+        elevation="24"
+        outlined
+        shaped
+        color="purple lighten-4"
+      >
+        <v-card-title primary-title class="d-flex justify-center">
+          <div class="headline font-weight-bold">Canciones y álbumes</div>
+        </v-card-title>
+        <img src="../assets/images/icono-musica.png" class="imagen-juego">
+        <v-card-text>
+          <v-btn
+            rounded
+            color="#AA00FF"
+            class="font-weight-bold white--text"
+            v-bind:to="{name: 'Musica'}"
+          >Ver Música</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -53,7 +101,7 @@ export default {
         },
       })
         .then((respuesta) => {
-          this.peliculas = respuesta.data.peliculas;
+          this.peliculas = respuesta.data.albumes;
           this.current_user = respuesta.data.current_user;
         })
         .catch(() => {
