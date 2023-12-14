@@ -30,27 +30,45 @@
 <template>
   <v-layout row justify-center align-center>
     <v-flex xs4>
-      <v-card>
-        <v-card-title primary-title>
-          <div class="headline">Videojuegos</div>
+      <v-card
+        elevation="24"
+        outlined
+        shaped
+        color="cyan lighten-4"
+      >
+        <v-card-title primary-title class="d-flex justify-center">
+          <div class="headline font-weight-bold">Videojuegos</div>
         </v-card-title>
         <img src="../assets/images/icono-juegos.png" class="imagen-juego">
         <v-card-text>
-          <v-btn>Ver Videojuegos</v-btn>
+          <v-btn
+            rounded
+            color="#AA00FF"
+            class="font-weight-bold white--text"
+            v-bind:to="{name: 'Videojuegos'}"
+          >Ver Videojuegos</v-btn>
         </v-card-text>
       </v-card>
     </v-flex>
 
-    <v-flex xs12 sm4>
-      <v-card>
-        <v-card-title primary-title>
-          <div>
-            <div class="headline">God of War</div>
-          </div>
+    <v-flex xs4>
+      <v-card
+        elevation="24"
+        outlined
+        shaped
+        color="purple lighten-4"
+      >
+        <v-card-title primary-title class="d-flex justify-center">
+          <div class="headline font-weight-bold">Canciones y álbumes</div>
         </v-card-title>
         <img src="../assets/images/icono-musica.png" class="imagen-juego">
         <v-card-text>
-          <v-btn>Ver Música</v-btn>
+          <v-btn
+            rounded
+            color="#AA00FF"
+            class="font-weight-bold white--text"
+            v-bind:to="{name: 'Musica'}"
+          >Ver Música</v-btn>
         </v-card-text>
       </v-card>
     </v-flex>
