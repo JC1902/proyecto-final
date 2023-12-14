@@ -3,7 +3,7 @@ const Esquema = mongoose.Schema;
 const EsquemaVideojuego = new Esquema({
   nombre: String, 
   sinopsis: String,
-  anhopub: Number,
+  anhopub: Date,
   desarrolladora: String,
   genero: String,
   imagen: String

@@ -19,6 +19,11 @@
             required
             :rules="reglasGenero"
         ></v-text-field>
+        <v-text-field
+            label="Link de la imagen:"
+            v-model="imagen"
+            required
+        ></v-text-field>
         <v-title>Fecha de lanzamiento:</v-title>
         <v-row justify="center">
           <v-column>
@@ -47,14 +52,15 @@
 import axios from 'axios';
 
 export default {
+  name: 'AgregarAlbum',
   data: () => ({
     valido: true,
     nombre: '',
     artista: '',
     picker: (
-      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().substr(0, 10),
+      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().slice(0, 10),
     genero: '',
-    anhopub: '',
+    imagen: '',
     reglasNombre: [
       v => !!v || 'El nombre del álbum es obligatorio',
     ],
@@ -65,17 +71,7 @@ export default {
     reglasArtista: [
       v => !!v || 'El artista es requerido',
     ],
-    select: null,
-    anhos: [
-      '2016',
-      '1967',
-      '2001',
-      '1958',
-      '1959',
-      '2018',
-    ],
   }),
-
   methods: {
     guardar() {
       if (this.$refs.formulario.validate()) {
@@ -85,10 +81,11 @@ export default {
           data: {
             nombre: this.nombre,
             artista: this.artista,
-            anhopub: this.anhopub,
+            picker: this.picker,
             genero: this.genero,
+            imagen: this.imagen,
           },
-          url: 'http://localhost:8081/peliculas',
+          url: 'http://localhost:8081/musica',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -96,21 +93,20 @@ export default {
           .then(() => {
             this.$swal(
               '¡Grandioso!',
-              'Película guardada satisfactoriamente',
+              'Álbum guardado satisfactoriamente',
               'success',
             );
-            this.$router.push({ name: 'Inicio' });
+            this.$router.push({ name: 'Musica' });
             this.$refs.formulario.reset();
           })
           .catch(() => {
             this.$swal(
               '¡¡Oh no!!',
-              'Ocurrió un error y no pudimos agregar la película',
+              'Ocurrió un error y no pudimos agregar el álbum',
               'error',
             );
           });
       }
-
       return true;
     },
     limpiar() {

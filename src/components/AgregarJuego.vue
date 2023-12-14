@@ -1,44 +1,54 @@
 <template>
-  <v-form v-model="valido" ref="formulario" lazy-validation>
-    <v-text-field
-      label="Videojuego:"
-      v-model="nombre"
-      :rules="reglasNombre"
-      required
-    ></v-text-field>
-    <v-text-field
-      label="Sinopsis:"
-      v-model="sinopsis"
-      multi-line
-    ></v-text-field>
-    <v-select
-      label="Año de publicación:"
-      v-model="anhopub"
-      required
-      :items="anhos"
-    ></v-select>
-    <v-text-field
-      label="Desarrolladora:"
-      v-model="desarrolladora"
-      required
-    ></v-text-field>
-    <v-text-field
-      label="Género:"
-      v-model="genero"
-      required
-      :rules="reglasGenero"
-    ></v-text-field>
-    <v-text-field
-      label="Url de la imagen:"
-      v-model="imagen"
-      required
-    ></v-text-field>
-    <v-btn
-      @click="guardar"
-      :disabled="!valido"
-    >Guardar</v-btn>
-    <v-btn @click="limpiar">Limpiar</v-btn>
-  </v-form>
+  <div class="contenedor-registro-juegos">
+    <v-form v-model="valido" ref="formulario" lazy-validation>
+      <v-text-field
+        label="Videojuego:"
+        v-model="nombre"
+        :rules="reglasNombre"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="Sinopsis:"
+        v-model="sinopsis"
+        multi-line
+      ></v-text-field>
+      <v-text-field
+        label="Desarrolladora:"
+        v-model="desarrolladora"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="Género:"
+        v-model="genero"
+        required
+        :rules="reglasGenero"
+      ></v-text-field>
+      <v-text-field
+        label="Url de la imagen:"
+        v-model="imagen"
+        required
+      ></v-text-field>
+      <v-title>Fecha de lanzamiento:</v-title>
+      <v-row justify="center">
+        <v-column>
+          <v-spacer></v-spacer>
+        </v-column>
+        <v-column>
+          <v-date-picker
+            v-model="anhopub"
+            color="purple accent-1"></v-date-picker>
+        </v-column>
+        <v-column>
+          <v-spacer></v-spacer>
+        </v-column>
+      </v-row>
+      <v-btn
+        @click="guardar"
+        :disabled="!valido"
+      >Guardar</v-btn>
+      <v-btn @click="limpiar">Limpiar</v-btn>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -49,25 +59,17 @@ export default {
     valido: true,
     nombre: '',
     sinopsis: '',
-    anhopub: '',
     desarrolladora: '',
     genero: '',
     imagen: '',
+    anhopub: (
+      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().slice(0, 10),
     reglasNombre: [
       v => !!v || 'El nombre es requerido',
     ],
     reglasGenero: [
       v => !!v || 'Género de película requerido',
       v => (v && v.length <= 80) || 'Género debe ser menor o igual a 80 caracteres',
-    ],
-    select: null,
-    anhos: [
-      '2016',
-      '1997',
-      '2001',
-      '2008',
-      '1999',
-      '2018',
     ],
   }),
 
@@ -95,7 +97,7 @@ export default {
               'Videojuego agregado correctamente',
               'success',
             );
-            this.$router.push({ name: 'Inicio' });
+            this.$router.push({ name: 'Videojuegos' });
             this.$refs.formulario.reset();
           })
           .catch(() => {

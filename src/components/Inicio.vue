@@ -39,7 +39,7 @@
         <v-card-title primary-title class="d-flex justify-center">
           <div class="headline font-weight-bold">Videojuegos</div>
         </v-card-title>
-        <img src="../assets/images/icono-juegos.png" class="imagen-juego">
+        <img src="../assets/images/icono-juegos.png" class="imagen-incio">
         <v-card-text>
           <v-btn
             rounded
@@ -61,7 +61,7 @@
         <v-card-title primary-title class="d-flex justify-center">
           <div class="headline font-weight-bold">Canciones y álbumes</div>
         </v-card-title>
-        <img src="../assets/images/icono-musica.png" class="imagen-juego">
+        <img src="../assets/images/icono-musica.png" class="imagen-inicio">
         <v-card-text>
           <v-btn
             rounded
@@ -101,7 +101,7 @@ export default {
         },
       })
         .then((respuesta) => {
-          this.peliculas = respuesta.data.peliculas;
+          this.peliculas = respuesta.data.albumes;
           this.current_user = respuesta.data.current_user;
         })
         .catch(() => {
