@@ -51,7 +51,7 @@ module.exports.controller = (app) => {
         const calificacion = new Rating({
             pelicula_id: req.params.id,
             user_id: req.body.user_id,
-            calif: requ.body.calif,
+            calif: req.body.calif,
         });
 
         calificacion.save(function (error, calif) {
