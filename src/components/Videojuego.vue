@@ -99,7 +99,7 @@ export default {
     async obtenerVideojuego() {
       return axios({
         method: 'get',
-        url: `/videojuego/${this.route.params.id}`,
+        url: `/videojuego/${this.$route.params.id}`,
       })
         .then((respuesta) => {
           this.videojuego = respuesta.data;

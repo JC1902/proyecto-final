@@ -24,12 +24,24 @@ module.exports.controller = (app) => {
   });
 
   app.get('/videojuegos', (req, res) => {
-    EsquemaVideojuego.find({}, 'nombre sinopsis anhopub imagen')
+    EsquemaVideojuego.find({}, 'nombre sinopsis anhopub genero imagen')
     .then((videojuegos) => {
       res.send(videojuegos);
     })
     .catch((error) => {
       console.log(error);
+    });
+  });
+
+  app.get('/videojuego/:id', (req, res) => {
+    EsquemaVideojuego.findById(req.params.id, 'nombre sinopsis anhopub desarrolladora genero imagen')
+    .then((videojuego) => {
+      res.send(videojuego);
+      console.log(this.videojuego);
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log(this.videojuego);
     });
   });
 }

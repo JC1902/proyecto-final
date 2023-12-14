@@ -13,10 +13,14 @@
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
           <v-card-title primary-title class="d-flex justify-center">
-            <div>
-              <div class="headline">{{ videojuego.nombre }}</div>
-              <div>
-                <v-img :src="videojuego.imagen" class="imagen-juego"></v-img>
+            <div class="centrar-elementos">
+              <div class="headline">
+                <v-btn v-bind:to="`videojuego/${videojuego._id}`" class="espacio-boton">
+                  {{ videojuego.nombre }}
+                </v-btn>
+              </div>
+              <div class="imagen-cada-juego">
+                <v-img :src="videojuego.imagen"></v-img>
               </div>
               <span class="grey--text">
                 {{ formatearFecha(videojuego.anhopub) }} &middot; {{ videojuego.genero }}
