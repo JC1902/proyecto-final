@@ -47,21 +47,17 @@
       prominent
       src="https://i2.wp.com/www.pentamusica.com/wp-content/uploads/2020/09/como-escribir-musica-para-videojuegos_1.png?w=1104&ssl=1"
       fade-img-on-scroll
-      scroll-target="#scrolling-techniques-3"
-    >
+      scroll-target="#scrolling-techniques-3">
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
           gradient="to top right, rgba(252,78,225,.7), rgba(107,35,96,.7)"
         ></v-img>
       </template>
-
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-
       <v-app-bar-title class="font-weight-bold">GameVibe</v-app-bar-title>
-
       <v-spacer></v-spacer>
       <v-btn
         v-bind:to="{name: 'Login'}"
@@ -71,7 +67,6 @@
       >Login</v-btn>
     </v-app-bar>
     <v-spacer class="mb-4"></v-spacer>
-
     <v-main>
      <v-container fluid>
        <div id="app">

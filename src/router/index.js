@@ -50,20 +50,10 @@ export default new Router({
       component: Login,
     },
     {
-      path: '/musica',
-      name: 'Musica',
-      component: Musica,
-    },
-    {
-      path: '/musica/agregar',
-      name: 'AgregarAlbum',
-      component: AgregarAlbum,
-    },
-    {
       path: '/videojuegos',
       name: 'Videojuegos',
       component: Videojuegos,
-    },
+    },    
     {
       path: '/videojuego/:id',
       name: 'Videojuego',
@@ -73,6 +63,17 @@ export default new Router({
       path: '/videojuegos/agregar',
       name: 'AgregarJuego',
       component: AgregarJuego,
+    },
+    {
+      path: '/musica',
+      name: 'Musica',
+      component: Musica,
+    },
+
+    {
+      path: '/musica/agregar',
+      name: 'AgregarAlbum',
+      component: AgregarAlbum,
     },
   ],
 });

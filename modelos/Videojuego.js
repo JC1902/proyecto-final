@@ -6,7 +6,8 @@ const EsquemaVideojuego = new Esquema({
   anhopub: Date,
   desarrolladora: String,
   genero: String,
-  imagen: String
+  imagen: String,
+ 
 });
 
 const Videojuego = mongoose.model('Videojuego', EsquemaVideojuego);
