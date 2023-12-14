@@ -10,7 +10,8 @@ module.exports.controller = (app) => {
       sinopsis: req.body.sinopsis,
       anhopub: req.body.anhopub,
       desarrolladora: req.body.desarrolladora, 
-      genero: req.body.genero
+      genero: req.body.genero,
+      imagen: req.body.imagen,
     });
 
     nuevoJuego.save()
@@ -21,6 +22,18 @@ module.exports.controller = (app) => {
         res.send(videojuego);
       });
   });
+
+  app.get('/videojuegos', (req, res) => {
+    EsquemaVideojuego.find({}, 'nombre sinopsis anhopub imagen')
+    .then((error, videojuegos) => {
+        if (error) { 
+            console.log(error);
+            res.send(error);
+        } else {
+            res.send({videojuegos});
+        }
+    });
+});
 
   //Obtener un videojuego
   app.get('/api/videojuegos/calif/:id', (req, res) =>{

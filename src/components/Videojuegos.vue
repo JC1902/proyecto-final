@@ -10,36 +10,19 @@
     <v-spacer class="mb-4"></v-spacer>
 
     <v-layout row wrap>
-      <v-flex xs4>
+      <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
           <v-card-title primary-title>
             <div>
-              <div class="headline">God of War</div>
+              <div class="headline">{{ videojuego.nombre }}</div>
               <div>
-                <img src="../assets/images/gow.jpg" class="imagen-juego">
+                <v-img src="{{videojuego.imagen}}" class="imagen-juego"></v-img>
               </div>
-              <span class="grey--text">Año &middot; 2018</span>
+              <span class="grey--text">Año &middot; {{ videojuego.anhopub }}</span>
             </div>
           </v-card-title>
           <v-card-text>
-            sinopsis
-          </v-card-text>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs4>
-        <v-card>
-          <v-card-title primary-title>
-            <div>
-              <div class="headline">God of War</div>
-              <div>
-                <img src="../assets/images/gow.jpg" class="imagen-juego">
-              </div>
-              <span class="grey--text">Año &middot; 2018</span>
-            </div>
-          </v-card-title>
-          <v-card-text>
-            sinopsis
+            {{ videojuego.sinopsis }}
           </v-card-text>
         </v-card>
       </v-flex>
@@ -47,16 +30,22 @@
 
     <v-spacer class="mb-4"></v-spacer>
 
-    <v-btn color="#00B0FF">Agrega un videojuego</v-btn>
+    <v-btn
+    color="#00B0FF"
+    v-bind:to="{name: 'AgregarJuego'}"
+    >Agrega un videojuego</v-btn>
   </v-flex>
 </template>
 
 <script>
+import axios from 'axios';
+
 const img1 = require('@/assets/images/gow.jpg');
 const img2 = require('@/assets/images/zelda.jpg');
 const img3 = require('@/assets/images/darsouls.jpg');
 
 export default {
+  name: 'Videojuegos',
   data() {
     return {
       items: [
@@ -73,7 +62,27 @@ export default {
           group: 'Dark Souls',
         },
       ],
+      videojuegos: [],
     };
+  },
+  mounted() {
+    this.obtenerVideojuegos();
+  },
+  methods: {
+    async obtenerVideojuegos() {
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/videojuegos',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((respuesta) => {
+          this.videojuegos = respuesta.data;
+        })
+        .catch(() => {
+        });
+    },
   },
 };
 </script>
