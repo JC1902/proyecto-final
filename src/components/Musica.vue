@@ -21,6 +21,7 @@ const img3 = require('@/assets/images/aespa.jpeg');
 const img4 = require('@/assets/images/nct127.jpeg');
 
 export default {
+  name: 'Musica',
   data() {
     return {
       items: [
