@@ -115,7 +115,7 @@ export default {
         })
           .then((respuesta) => {
             this.videojuegos = respuesta.data.videojuegos;
-            this.$router.push({ name: 'VideojuegoGenero' });
+            this.$router.push({ name: 'Videojuegos' });
           })
           .catch(() => {
             // Handle error

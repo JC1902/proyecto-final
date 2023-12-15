@@ -55,10 +55,10 @@ module.exports.controller = (app) => {
   });
 
   //Obtiene un juego dependiendo de su genero 
-  app.get('/videojuegos/genero/:genero', (req, res) => {
+  app.get('/videojuegos/:genero', (req, res) => {
     const genero = req.params.genero;
   
-    EsquemaVideojuego.find({ genero: genero }, 'nombre sinopsis anhopub imagen')
+    EsquemaVideojuego.find({ _genero: genero }, 'nombre sinopsis anhopub imagen')
       .then((videojuegos) => {
         res.send({ videojuegos });
       })
