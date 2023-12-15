@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Inicio from '@/components/Inicio';
 import SobreNosotros from '@/components/SobreNosotros';
-import AgregarPelicula from '@/components/AgregarPelicula';
-import Pelicula from '@/components/Pelicula';
 import Registro from '@/components/Registro';
 import Login from '@/components/Login';
 
@@ -28,16 +26,6 @@ export default new Router({
       path: '/sobre-nostros',
       name: 'SobreNosotros',
       component: SobreNosotros,
-    },
-    {
-      path: '/peliculas/agregar',
-      name: 'AgregarPelicula',
-      component: AgregarPelicula,
-    },
-    {
-      path: '/peliculas/:id',
-      name: 'Pelicula',
-      component: Pelicula,
     },
     {
       path: '/usuarios/registro',
