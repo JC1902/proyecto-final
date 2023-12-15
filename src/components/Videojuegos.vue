@@ -22,7 +22,7 @@
           <v-card-title primary-title class="d-flex justify-center">
             <div class="centrar-elementos">
               <div class="headline">
-                <v-btn v-bind:to="`videojuegos/${videojuego._id}`" class="espacio-boton">
+                <v-btn v-bind:to="`videojuego/${videojuego._id}`" class="espacio-boton">
                   {{ videojuego.nombre }}
                 </v-btn>
               </div>
@@ -116,19 +116,19 @@ export default {
       }
     },
     formatearFecha(fecha) {
-        // Crear un objeto Date con la fecha proporcionada
-        const fechaNueva = new Date(fecha);
+      // Crear un objeto Date con la fecha proporcionada
+      const fechaNueva = new Date(fecha);
 
-        // Obtener los componentes individuales de la fecha
-        const dia = fechaNueva.getDate() + 1;
-        const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
-        const año = fechaNueva.getFullYear();
+      // Obtener los componentes individuales de la fecha
+      const dia = fechaNueva.getDate() + 1;
+      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+      const año = fechaNueva.getFullYear();
 
-        // Crear una cadena con el formato día, mes, año
-        const fechaFormateada = `${dia}/${mes}/${año}`;
-        return fechaFormateada;
-      }
+      // Crear una cadena con el formato día, mes, año
+      const fechaFormateada = `${dia}/${mes}/${año}`;
+      return fechaFormateada;
+    },
   },
-}
+};
 </script>
 

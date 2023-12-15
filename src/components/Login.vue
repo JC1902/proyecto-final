@@ -18,7 +18,7 @@
      :disabled="!valido"
      color="success"
     >Entrar</v-btn>
-    <v-btn @click="limpar" color="warning">Limpiar</v-btn>
+    <v-btn @click="limpiar" color="warning">Limpiar</v-btn>
 
     <v-spacer class="mb-4"></v-spacer>
 
@@ -40,32 +40,35 @@ export default {
     ],
     reglasContra: [
       v => !!v || 'La contraseña no puede estar vacía',
-      v => v.length >= 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
   methods: {
     async entrar() {
-      return axios({
-        method: 'post',
-        data: {
-          email: this.email,
-          contrasenha: this.contrasenha,
-        },
-        url: 'http://localhost:8081/usuarios/login',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((respuesta) => {
-          window.localStorage.setItem('auth', respuesta.data.token);
-          this.$swal('Ma-ra-vi-llo-so!', 'Está listo para iniciar', 'success');
-          this.$router.push({ name: 'Inicio' });
+      if (this.$refs.formulario.validate()) {
+        return axios({
+          method: 'post',
+          data: {
+            email: this.email,
+            contrasenha: this.contrasenha,
+          },
+          url: 'http://localhost:8081/usuarios/login',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
-        .catch((error) => {
-          const mensaje = error.respuesta.data.mensaje;
-          this.$swal('Oh no!', `${mensaje}`, 'error');
-          this.$router.push({ name: 'Login' });
-        });
+          .then((respuesta) => {
+            window.localStorage.setItem('auth', respuesta.data.token);
+            this.$swal('Ma-ra-vi-llo-so!', 'Está listo para iniciar', 'success');
+            this.$router.push({ name: 'Inicio' });
+          })
+          .catch((error) => {
+            const mensaje = error.response.data.mensaje;
+            this.$swal('Oh no!', `${mensaje}`, 'error');
+            this.$router.push({ name: 'Login' });
+          });
+      }
+
+      return true;
     },
     limpiar() {
       this.$refs.formulario.reset();
