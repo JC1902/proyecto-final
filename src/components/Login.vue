@@ -60,11 +60,13 @@ export default {
             window.localStorage.setItem('auth', respuesta.data.token);
             this.$swal('Ma-ra-vi-llo-so!', 'Está listo para iniciar', 'success');
             this.$router.push({ name: 'Inicio' });
+            // eslint-disable-next-line no-console
+            console.log(respuesta.data);
           })
           .catch((error) => {
             const mensaje = error.response.data.mensaje;
             this.$swal('Oh no!', `${mensaje}`, 'error');
-            this.$router.push({ name: 'Login' });
+            this.$router.push({ name: 'Inicio' });
           });
       }
 
