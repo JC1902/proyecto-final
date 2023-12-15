@@ -10,7 +10,7 @@
     <div class="button_categorias">
 
       <div class="button_agregar">
-        <v-btn class="ma-2" v-bind:to="'/musica/agregar'" outlined color="indigo">
+        <v-btn class="ma-2" v-bind:to="'/musica/agregar'" filled color="deep-purple accent-1">
           Agregar un album
         </v-btn>
       </div>
@@ -19,12 +19,7 @@
         <v-sheet class="mx-auto" max-width="1000">
           <v-slide-group multiple show-arrows>
             <v-slide-item v-for="categoria in categorias" :key="categoria._id" v-slot="{ active }">
-              <v-btn
-                class="mx-2"
-                :input-value="active"
-                active-class="purple white--text"
-                depressed
-                rounded
+              <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded
                 @click="handleClickCategoria(categoria)">
                 {{ categoria }}
               </v-btn>
@@ -70,7 +65,39 @@
 
 <script>
 import axios from 'axios';
+import Vue from 'vue';
+import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/main.css';
+
+const wrapper = document.createElement('div');
+// estado compartido
+const estado = {
+  nota: 0,
+};
+// crear componente en contenido
+const ComponenteCalif = Vue.extend({
+  data() {
+    return {
+      calif: 0,
+    };
+  },
+  watch: {
+    calif(nuevoValor) {
+      estado.nota = nuevoValor;
+    },
+  },
+  template: `
+    <div class="rating">
+      ¿Cuál fue su expriencia viendo esta película?
+      <star-rating v-model="calif" :show-rating="false"></star-rating>
+    </div>   
+  `,
+  components: {
+    'star-rating': StarRating,
+  },
+});
+
+const componente = new ComponenteCalif().$mount(wrapper);
 
 const img1 = require('@/assets/images/RedVelvet.jpeg');
 const img2 = require('@/assets/images/newjeans.jpeg');
@@ -168,15 +195,25 @@ export default {
           'Content-Type': 'application/json',
         },
       })
-      .then((respuesta) => {
-        for(const referencia of respuesta.data[0].referencias) {
-          this.categorias.push(referencia);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-    }
+        .then((respuesta) => {
+          for (const referencia of respuesta.data[0].referencias) {
+            this.categorias.push(referencia);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    async calificar() {
+      this.$swal({
+        content: componente.$el,
+        buttons: {
+          confirm: {
+            value: 0,
+          },
+        },
+      });
+    },
   },
 };
 </script>
