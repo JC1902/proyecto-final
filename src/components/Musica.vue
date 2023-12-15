@@ -19,7 +19,12 @@
         <v-sheet class="mx-auto" max-width="1000">
           <v-slide-group multiple show-arrows>
             <v-slide-item v-for="categoria in categorias" :key="categoria._id" v-slot="{ active }">
-              <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded
+              <v-btn
+                class="mx-2"
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
                 @click="handleClickCategoria(categoria)">
                 {{ categoria }}
               </v-btn>
@@ -68,6 +73,8 @@ import axios from 'axios';
 import Vue from 'vue';
 import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/main.css';
+
+/* eslint-disable */
 
 const wrapper = document.createElement('div');
 // estado compartido
