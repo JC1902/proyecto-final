@@ -28,6 +28,10 @@
         <div>
           <v-btn text color="purple" @click="calificar()">Calificar</v-btn>
         </div>
+
+        <div>
+          <v-btn text @click="resenhar()">Reseñar</v-btn>
+        </div>
         </b-col>
       </b-row>
     </b-container>
@@ -41,9 +45,12 @@ import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/videojuego.css';
 
 const wrapper = document.createElement('div');
+const wrapperResena = document.createElement('div');
+
 // estado compartido
 const estado = {
   nota: 0,
+  resenas: [],
 };
 // crear componente en contenido
 const ComponenteCalif = Vue.extend({
@@ -60,7 +67,12 @@ const ComponenteCalif = Vue.extend({
   template: `
     <div class="rating">
       ¿Cuál fue su expriencia juego este videojuego?
-      <star-rating v-model="calif" :show-rating="false"></star-rating>
+      <star-rating
+        v-model="calif"
+        :show-rating="false"
+        inactive-color="#B388FF"
+        active-color="#4A148C"
+      ></star-rating>
     </div>   
   `,
   components: {
@@ -68,7 +80,30 @@ const ComponenteCalif = Vue.extend({
   },
 });
 
+const ComponenteResenha = Vue.extend({
+  data() {
+    return {
+      resena: '',
+    };
+  },
+  watch: {
+    resena(nuevaResena) {
+      estado.resenas.push(nuevaResena);
+    },
+  },
+  template: `
+    <div>
+      <v-text-field
+        v-model="resenas"
+        label="Escribe tu reseña"
+        multi-line
+      ></v-text-field>
+    </div>
+  `,
+});
+
 const componente = new ComponenteCalif().$mount(wrapper);
+const componenteResenha = new ComponenteResenha().$mount(wrapperResena);
 
 export default {
   name: 'Videojuego',
@@ -97,13 +132,43 @@ export default {
             data: {
               calif: estado.nota,
             },
-            url: `http://localhost:8081/videojuego/calif/${videojuegoId}`,
+            url: `http://localhost:8081/videojuegos/calif/${videojuegoId}`,
             headers: {
               'Content-Type': 'application/json',
             },
           })
             .then(() => {
               this.$swal(`¡Gracias por calificar! ${estado.nota}`, 'success');
+            })
+            .catch((error) => {
+              const mensaje = error.respuesta.data.message;
+              this.$swal('Oh no puede ser!', `${mensaje}`, 'error');
+            });
+        });
+    },
+    async resenhar() {
+      this.$swal({
+        content: componenteResenha.$el,
+        buttons: {
+          confirm: {
+            value: 0,
+          },
+        },
+      })
+        .then(() => {
+          const videojuegoId = this.$route.params.id;
+          return axios({
+            method: 'post',
+            data: {
+              resena: estado.resenas,
+            },
+            url: `http://localhost:8081/videojuegos/resena/${videojuegoId}`,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(() => {
+              this.$swal('Gracias por dar tu opinión!', 'success');
             })
             .catch((error) => {
               const mensaje = error.respuesta.data.message;
