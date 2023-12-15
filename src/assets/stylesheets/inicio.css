@@ -88,6 +88,27 @@ a.side_bar_link {
     margin-bottom: 15px;
 }
 
+.margin-top-bottom {
+    margin: 20px 0;
+}
+
+.button_categorias {
+    width: 100%;
+    max-width: 100% !important;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+/* 
+.categorias {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+} */
+
 /* Agregar Album -> /musica/agregar */
 
 .contenedor-registro-albums {
