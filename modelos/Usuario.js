@@ -42,9 +42,17 @@ module.exports.crearUsuario = (nuevoUsuario, callback) => {
 };
 
 module.exports.obtenerUsuarioPorEmail = (email, callback) => {
-    const consulta= {email};
+    const consulta = { email: email };
+    console.log(email);
     Usuario.findOne(consulta)
-    .then(callback);
+        .then((usuarioEncontrado) => {
+            console.log('Usuario encontrado:', usuarioEncontrado); // Add this line
+            callback(null, usuarioEncontrado);
+        })
+        .catch((error) => {
+            console.error('Error en la consulta a la base de datos:', error);
+            callback({ mensaje: 'Error en la consulta a la base de datos' });
+        });
 };
 
 module.exports.comparaContrasenha = (contrasenhaCandidato, hash, callback) => {

@@ -34,24 +34,23 @@ module.exports.controller = (app) => {
 
     // Iniciar sesion
     app.post('/usuarios/login', (req, res) => {
-        if (req.body.email && req.body.password) {
+        if (req.body.email && req.body.contrasenha) {
             const email = req.body.email;
-            const contrasenha = req.body.password;
+            const contrasenha = req.body.contrasenha;
             Usuario.obtenerUsuarioPorEmail(email, (err, usuario) => {
                 if (!usuario) {
                     res.status(404).json({ mensaje: 'El usuario no existe' });
-                } else {
-                    Usuario.compararContrasenha(contrasenha, usuario.contrasenha, (error, coincide) => {
-                        if (error) throw error;
-                        if (coincide) {
-                            const payload = { id: usuario.id };
-                            const token = jwt.sign(payload, jwtOptions.secretOrKey);
-                            res.json({ mensaje: 'Ok', token });
-                        } else {
-                            res.status(401).json({ mensaje: 'La contraseña es incorrecta' });
-                        }
-                    });
-                }
+                } 
+                Usuario.comparaContrasenha(contrasenha, usuario.contrasenha, (error, coincide) => {
+                    if (error) throw error;
+                    if (coincide) {
+                        const payload = { id: usuario.id };
+                        const token = jwt.sign(payload, jwtOptions.secretOrKey);
+                        res.json({ mensaje: 'Ok', token });
+                    } else {
+                        res.status(401).json({ mensaje: 'La contraseña es incorrecta' });
+                    }
+                });
             });
         }
     });
