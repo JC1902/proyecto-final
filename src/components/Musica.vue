@@ -21,8 +21,8 @@
                   {{ album.nombre }}
                 </v-btn>
               </div>
-              <div class="imagen-juego">
-                <v-img :src="album.imagen" ></v-img>
+              <div class="imagen-musica">
+                <v-img :src="album.imagen"></v-img>
               </div>
               <span class="gray--text">
                 {{ formatearFecha(album.picker) }} &middot; {{ album.genero }}
@@ -102,7 +102,7 @@ export default {
       const fechaNueva = new Date(fecha);
 
       // Obtener los componentes individuales de la fecha
-      const dia = fechaNueva.getDate();
+      const dia = fechaNueva.getDate() + 1;
       const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
       const año = fechaNueva.getFullYear();
 

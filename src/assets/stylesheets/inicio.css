@@ -79,16 +79,29 @@ a.side_bar_link {
     margin-top: 30px;
 }
 
+.imagen-inicio {
+    max-width: 75%;
+    max-height: 75%;
+}
+
 /* Agregar Album -> /musica/agregar */
 
 .contenedor-registro-albums {
     margin-top: 150px;
 }
 
+.imagen-musica {
+    max-width: 20%;
+    max-height: 20%;
+}
+
 /* Videojuegos */
 .imagen-juego {
-    max-width: 40%;
-    max-height: 40%;
+    max-width: 50%;
+    max-height: 50%;
     margin: 20px 0;
 }
 
+.contenedor-registro-juegos {
+    margin-top: 150px;
+}
