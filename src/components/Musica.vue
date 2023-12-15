@@ -134,13 +134,13 @@ export default {
         },
       ],
       albumes: [],
-      categorias: ['Kpop', 'SM', '1999'],
+      categorias: [],
       model: null,
     });
   },
   mounted() {
     this.obtenerAlbumes();
-    // this.obtenerCategoriasIniciales();
+    this.obtenerCategoriasIniciales();
   },
   methods: {
     async obtenerAlbumes() {
@@ -159,6 +159,17 @@ export default {
         })
         .catch(() => {
         });
+    },
+    async obtenerCategoriasIniciales() {
+      try {
+        const response = await axios.get('http://localhost:8081/categorias');
+        console.log(response.data);
+        this.categorias = [response.data[0].nombre];
+        this.categorias.push(response.data[1].nombre);
+        this.categorias.push(response.data[2].nombre);
+      } catch (error) {
+        console.error(error);
+      }
     },
     formatearFecha(fecha) {
       // Crear un objeto Date con la fecha proporcionada

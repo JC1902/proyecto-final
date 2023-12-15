@@ -2,22 +2,14 @@
   <div class="contenedor-registro-albums">
     <v-form v-model="valido" ref="formulario" lazy-validation>
       <v-text-field label="Álbum" v-model="nombre" :rules="reglasNombre" required></v-text-field>
-      <v-text-field
-        label="Artista:"
-        v-model="artista"
-        :rules="reglasArtista"
-        required></v-text-field>
+      <v-text-field label="Artista:" v-model="artista" :rules="reglasArtista" required></v-text-field>
       <v-text-field label="Género:" v-model="genero" required :rules="reglasGenero"></v-text-field>
       <v-text-field label="Link de la imagen:" v-model="imagen" required></v-text-field>
 
       <v-combobox v-model="chips" :items="items" chips clearable label="Categorias" multiple
         prepend-icon="mdi-filter-variant" solo>
         <template v-slot:selection="{ attrs, item, select, selected }">
-          <v-chip
-            v-bind="attrs"
-            :input-value="selected"
-            close @click="select"
-            @click:close="remove(item)">
+          <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="remove(item)">
             <strong>{{ item }}</strong>&nbsp;
             <span>(interest)</span>
           </v-chip>
@@ -134,17 +126,16 @@ export default {
       try {
 
         const chipsAuxiliar = this.chips.filter(item => item !== this.chips[0]);
-        console.log("AUXILIAR: ", chipsAuxiliar);
-
         for (const chip of chipsAuxiliar) {
-          this.agregarCategorias(this.chips[0], chip);
+          this.actualizarCategorias(this.chips[0], chip);
+          this.agregarCategorias(chip);
         }
 
       } catch (error) {
         console.log(error);
       }
     },
-    async agregarCategorias(destino, valor) {
+    async actualizarCategorias(destino, valor) {
       return axios({
         method: 'put',
         data: {
@@ -156,7 +147,27 @@ export default {
           'Content-Type': 'application/json',
         },
       });
-    }
+    },
+    async agregarCategorias(categoria) {
+
+      const response = await axios.get(`http://localhost:8081/categorias/${categoria}`);
+
+      if (response.data.length === 0) {
+        return axios({
+          method: 'post',
+          data: {
+            nombre: categoria,
+            referencias: [],
+          },
+          url: 'http://localhost:8081/categorias',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+      }
+
+      return true;
+    },
   },
 };
 </script>
