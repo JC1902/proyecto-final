@@ -163,7 +163,7 @@ export default {
     async agregarCategorias(categoria) {
       return axios({
         method: 'get',
-        url: `http://localhost:8081/musica/categorias/${categoria}`,
+        url: `http://localhost:8081/categorias/${categoria}`,
         headers: {
           'Content-Type': 'application/json',
         },

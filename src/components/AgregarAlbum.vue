@@ -110,8 +110,8 @@ export default {
     },
     async obtenerCategorias() {
       try {
-        const response = await axios.get('http://localhost:8081/musica/categorias');
-        console.log(response.data);
+        const response = await axios.get('http://localhost:8081/categorias');
+        console.log(response);
         this.items = []; // Limpiar el arreglo antes de asignar nuevas categorías
         response.data.forEach((cat) => {
           this.items.push(cat.nombre);
@@ -127,7 +127,7 @@ export default {
         for (const chip of this.chips) {
 
           console.log(chip);
-          const categoria = await axios.get(`http://localhost:8081/musica/categorias/${chip.toString()}`);
+          const categoria = await axios.get(`http://localhost:8081/categorias/${chip.toString()}`);
           let nuevos;
 
           if (categoria.data.length > 0) {
@@ -143,13 +143,13 @@ export default {
             }
 
             if (nuevos.length > 0) {
-              await axios.put(`http://localhost:8081/musica/categorias/${categoria.data[0]._id}`, {
+              await axios.put(`http://localhost:8081/categorias/${categoria.data[0]._id}`, {
                 nombre: chip,
                 referencias: [...referenciasExistentes, ...nuevos],
               });
             }
           } else {
-            await axios.post('http://localhost:8081/musica/categorias', {
+            await axios.post('http://localhost:8081/categorias', {
               nombre: chip,
               referencias: nuevos,
             });
