@@ -9,6 +9,18 @@
 
     <v-spacer class="mb-4"></v-spacer>
 
+    <container>
+      <b-row>
+        <b-col v-for="genre in genres" :key="genre">
+          <v-btn rounded color="#AA00FF" @click="filterByGenre(genre)">
+            {{ genre }}
+          </v-btn>
+        </b-col>
+      </b-row>
+    </container>
+
+    <v-spacer class="mb-4"></v-spacer>
+    <v-spacer class="mb-4"></v-spacer>
     <v-layout row wrap>
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
@@ -34,6 +46,7 @@
     color="#00B0FF"
     v-bind:to="{name: 'AgregarJuego'}"
     >Agrega un videojuego</v-btn>
+    <v-spacer class="mb-4"></v-spacer>
   </v-flex>
 </template>
 
@@ -63,6 +76,8 @@ export default {
         },
       ],
       videojuegos: [],
+      genres: ['Acción/Aventuras', 'Fromsoftware', 'SantaMonica', 'Hack n slash', 'Shooter', 'All'],
+
     };
   },
   mounted() {
@@ -82,6 +97,28 @@ export default {
         })
         .catch(() => {
         });
+    },
+    filterByGenre(genre) {
+      if (genre === 'All') {
+        // If 'All' is selected, fetch all video games
+        this.obtenerVideojuegos();
+      } else {
+        // Fetch video games based on the selected genre
+        axios({
+          method: 'get',
+          url: `http://localhost:8081/videojuegos/genero/${genre}`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((respuesta) => {
+            this.videojuegos = respuesta.data.videojuegos;
+            this.$router.push({ name: 'VideojuegoGenero' });
+          })
+          .catch(() => {
+            // Handle error
+          });
+      }
     },
   },
 };

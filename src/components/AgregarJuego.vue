@@ -1,5 +1,6 @@
 <template>
-  <v-form v-model="valido" ref="formulario" lazy-validation>
+  <div class="contenedor-registro-albums">
+    <v-form v-model="valido" ref="formulario" lazy-validation>
     <v-text-field
       label="Videojuego:"
       v-model="nombre"
@@ -11,12 +12,6 @@
       v-model="sinopsis"
       multi-line
     ></v-text-field>
-    <v-select
-      label="Año de publicación:"
-      v-model="anhopub"
-      required
-      :items="anhos"
-    ></v-select>
     <v-text-field
       label="Desarrolladora:"
       v-model="desarrolladora"
@@ -29,16 +24,33 @@
       :rules="reglasGenero"
     ></v-text-field>
     <v-text-field
-      label="Url de la imagen:"
+      label="Link de la imagen:"
       v-model="imagen"
       required
     ></v-text-field>
+    <v-title>Fecha de lanzamiento</v-title>
+        <v-row justify="center">
+          <v-column>
+            <v-spacer></v-spacer>
+          </v-column>
+          <v-column>
+            <v-date-picker
+              v-model="picker"
+              color="pink accent-1"></v-date-picker>
+          </v-column>
+          <v-column>
+            <v-spacer></v-spacer>
+          </v-column>
+        </v-row>
     <v-btn
       @click="guardar"
       :disabled="!valido"
     >Guardar</v-btn>
     <v-btn @click="limpiar">Limpiar</v-btn>
-  </v-form>
+    </v-form>
+  </div>
+
+
 </template>
 
 <script>
@@ -60,15 +72,8 @@ export default {
       v => !!v || 'Género de película requerido',
       v => (v && v.length <= 80) || 'Género debe ser menor o igual a 80 caracteres',
     ],
-    select: null,
-    anhos: [
-      '2016',
-      '1997',
-      '2001',
-      '2008',
-      '1999',
-      '2018',
-    ],
+    picker: (
+      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().slice(0, 10),
   }),
 
   methods: {

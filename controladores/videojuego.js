@@ -54,6 +54,20 @@ module.exports.controller = (app) => {
     });
   });
 
+  //Obtiene un juego dependiendo de su genero 
+  app.get('/videojuegos/genero/:genero', (req, res) => {
+    const genero = req.params.genero;
+  
+    EsquemaVideojuego.find({ genero: genero }, 'nombre sinopsis anhopub imagen')
+      .then((videojuegos) => {
+        res.send({ videojuegos });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send(error);
+      });
+  });
+
   //Eliminar un videojuego por id
   app.delete('/videojuegos/:id', (req, res) => {
     EsquemaVideojuego.deleteOne({_id: req.params.id})

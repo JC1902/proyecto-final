@@ -1,37 +1,27 @@
 <template>
   <div>
-    <b-container class="sombra">
+    <b-container class="sombra" xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
       <b-row>
         <b-col lg="4">
           <div>
             <img
             class="sombra imagen"
-            :src="items[0].src"
+            :src="videojuego.imagen"
             :width="300"
             :radius-border="2.5">
           </div>
         </b-col>
         <b-col>
           <v-card-title primary-title :dislpay="inherit">
-            God of war 
+            {{ videojuego.nombre }}
           </v-card-title>
           <v-card-text>
           <span class="grey--text" >
-              2018 &middot; Accion/Aventura  &middot; Santa Monica Studios
+              {{ videojuego.anhopub }} &middot; {{ videojuego.genero }}  &middot; {{ videojuego.imagen }}
             </span>
         </v-card-text>
         <v-text class="texto" scoped>
-          Kratos ha dejado atrás su venganza contra 
-          los dioses del Olimpo y vive ahora como un 
-          hombre en los dominios de los dioses y 
-          monstruos nórdicos. En este mundo cruel e 
-          implacable debe luchar para sobrevivir… y 
-          enseñar a su hijo a hacerlo también. 
-          Aclamado reboot de la franquicia de videojuegos 
-          "God of War", inspirado por "The Last of Us" 
-          y centrado en su vertiente narrativa. 
-          Entre sus particularidades, está diseñado 
-          simulando un plano secuencia sin cortes.
+          {{ videojuego.sinopsis }}
         </v-text>
 
         <div>
