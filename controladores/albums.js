@@ -12,6 +12,7 @@ module.exports.controller = (app) => {
       picker: req.body.picker,
       genero: req.body.genero,
       imagen: req.body.imagen,
+      categorias: req.body.categorias,
     });
 
     nuevoAlbum.save()
@@ -23,9 +24,9 @@ module.exports.controller = (app) => {
     })
   });
 
-  // Obtener todos los albumes ,passport.authenticate('jwt', { session: false }),
-  app.get('/musica', (req, res) => {
-    EsquemaAlbum.find({}, 'nombre artista picker genero imagen')
+  // Obtener un álbum por categoría
+  app.get('/musica/:categoria', (req, res) => {
+    EsquemaAlbum.find({categorias: { $in: [req.params.categoria] }}, 'nombre artista picker genero imagen categorias')
     .then((albumes) => {
       res.send(albumes);
     })
@@ -33,4 +34,17 @@ module.exports.controller = (app) => {
       console.log(error);
     });
   });
+
+
+  // Obtener todos los albumes ,passport.authenticate('jwt', { session: false }),
+  app.get('/musica', (req, res) => {
+    EsquemaAlbum.find({}, 'nombre artista picker genero imagen categorias')
+    .then((albumes) => {
+      res.send(albumes);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  });
+
 }
