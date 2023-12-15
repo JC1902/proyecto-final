@@ -75,6 +75,7 @@ export default {
           })
           .catch((error) => {
             const mensaje = error.response.data.mensaje;
+            console.log(error);
             this.$swal('¡Oh no!', `${mensaje}`, 'error');
           });
       }

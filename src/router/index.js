@@ -55,12 +55,12 @@ export default new Router({
       component: Videojuegos,
     },
     {
-      path: '/videojuego/:id',
+      path: '/videojuegos/:id',
       name: 'Videojuego',
       component: Videojuego,
     },
     {
-      path: '/videojuego/:genero',
+      path: '/videojuegos/:genero',
       name: 'VideojuegoGenero',
       component: Videojuego,
     },

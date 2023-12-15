@@ -18,6 +18,7 @@ const router = express.Router();
 const serveStatic = require('serve-static');
 
 app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());

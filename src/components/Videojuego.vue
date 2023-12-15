@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="sombra" xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
+    <b-container class="sombra" >
       <b-row>
         <b-col lg="4">
           <div>

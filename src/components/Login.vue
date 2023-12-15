@@ -18,7 +18,7 @@
      :disabled="!valido"
      color="success"
     >Entrar</v-btn>
-    <v-btn @click="limpar" color="warning">Limpiar</v-btn>
+    <v-btn @click="limpiar" color="warning">Limpiar</v-btn>
 
     <v-spacer class="mb-4"></v-spacer>
 
@@ -40,9 +40,12 @@ export default {
     ],
     reglasContra: [
       v => !!v || 'La contraseña no puede estar vacía',
-      v => v.length >= 8 || 'La contraseña debe tener 8 o más caracteres',
+      v => v.length > 8 || 'La contraseña debe tener 8 o más caracteres',
     ],
   }),
+  mounted(){
+    this.entrar();
+  },
   methods: {
     async entrar() {
       return axios({
@@ -56,13 +59,13 @@ export default {
           'Content-Type': 'application/json',
         },
       })
-        .then((respuesta) => {
-          window.localStorage.setItem('auth', respuesta.data.token);
+        .then((response) => {
+          window.localStorage.setItem('auth', response.data.token);
           this.$swal('Ma-ra-vi-llo-so!', 'Está listo para iniciar', 'success');
           this.$router.push({ name: 'Inicio' });
         })
         .catch((error) => {
-          const mensaje = error.respuesta.data.mensaje;
+          const mensaje = error.response.data.mensaje;
           this.$swal('Oh no!', `${mensaje}`, 'error');
           this.$router.push({ name: 'Login' });
         });

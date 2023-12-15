@@ -4,8 +4,15 @@ const bcryptjs = require('bcryptjs');
 const Esquema = mongoose.Schema;
 const EsquemaUsuario = new Esquema ({
     nombre: String,
-    email: String,
-    contrasenha: String,
+    email:  {
+        type: String,
+        required: true,
+        unique: true, // Ejemplo de validación única
+    },
+    contrasenha: {
+        type: String,
+        required: true,
+    },
 });
 
 const Usuario = mongoose.model('Usuario', EsquemaUsuario);
@@ -23,10 +30,10 @@ module.exports.crearUsuario = (nuevoUsuario, callback) => {
     });
 };
 
-module.exports.obtenerUsuarioPorEmail = (email, callback) => {
-    const consulta= {email};
+module.exports.obtenerUsuarioPorEmail = (Email, callback) => {
+    const consulta =  { email: Email } ;
     Usuario.findOne(consulta)
-    .then(callback);
+        .then(callback);
 };
 
 module.exports.comparaContrasenha = (contrasenhaCandidato, hash, callback) => {

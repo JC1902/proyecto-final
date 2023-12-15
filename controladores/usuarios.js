@@ -24,7 +24,8 @@ module.exports.controller = (app) => {
             if (error) {
                 console.error(error);
                 res.status(422).json({
-                    mensaje: 'Algo salio mal. Por favor inténtelo de nuevo más adelante',
+                    mensaje: 'Algo salio mal. ',
+                    error: error.message 
                 });
             } else {
                 res.send({ usuario });
@@ -34,10 +35,11 @@ module.exports.controller = (app) => {
 
     // Iniciar sesion
     app.post('/usuarios/login', (req, res) => {
-        if (req.body.email && req.body.password) {
-            const email = req.body.email;
+        if (req.body.email && req.body.contrasenha) {
+            const email = req.body.email;            
             const contrasenha = req.body.contrasenha;
-            Usuario.obtenerUsuarioPorEmail(email, (err, usuario) => {
+            Usuario.obtenerUsuarioPorEmail( email, (err, usuario) => {
+                if (err) { res.status(404).json({menaje:'Hay algun error'})}
                 if (!usuario) {
                     res.status(404).json({ mensaje: 'El usuario no existe' });
                 } else {
@@ -53,6 +55,8 @@ module.exports.controller = (app) => {
                     });
                 }
             });
+        }else{
+            res.status(404).json({mensaje:'No se que paso'})
         }
     });
 };
