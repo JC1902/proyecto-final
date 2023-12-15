@@ -120,45 +120,33 @@ export default {
         console.error('Error al obtener álbumes por categoría:', error);
       }
     },
-    async guardarCategorias() {
-
+    guardarCategorias() {
       try {
-        console.log(this.chips);
-        for (const chip of this.chips) {
 
-          console.log(chip);
-          const categoria = await axios.get(`http://localhost:8081/categorias/${chip.toString()}`);
-          let nuevos;
+        const chipsAuxiliar = this.chips.filter(item => item !== this.chips[0]);
+        console.log("AUXILIAR: ", chipsAuxiliar);
 
-          if (categoria.data.length > 0) {
-
-            const referenciasExistentes = categoria.data[0].referencias;
-            console.log("Referencias existentes: ", referenciasExistentes);
-
-            nuevos = this.chips.filter(ref => !referenciasExistentes.includes(ref));
-            console.log("Nuevas Referencias: ", nuevos);
-
-            for(const nueva of nuevos){
-              referenciasExistentes.push(nueva);
-            }
-
-            if (nuevos.length > 0) {
-              await axios.put(`http://localhost:8081/categorias/${categoria.data[0]._id}`, {
-                nombre: chip,
-                referencias: [...referenciasExistentes, ...nuevos],
-              });
-            }
-          } else {
-            await axios.post('http://localhost:8081/categorias', {
-              nombre: chip,
-              referencias: nuevos,
-            });
-          }
+        for (const chip of chipsAuxiliar) {
+          this.agregarCategorias(this.chips[0], chip);
         }
+
       } catch (error) {
         console.log(error);
       }
     },
+    async agregarCategorias(destino, valor) {
+      return axios({
+        method: 'put',
+        data: {
+          nombre: destino,
+          nuevo_valor: valor,
+        },
+        url: 'http://localhost:8081/categorias',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
   },
 };
 </script>

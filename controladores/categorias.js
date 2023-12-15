@@ -42,11 +42,8 @@ module.exports.controller = (app) => {
       });
   });
 
-  app.put('/categorias/:id', (req, res) => {
-    const { id } = req.params;
-    const nuevosDatos = req.body;
-
-    EsquemaCategoria.findByIdAndUpdate(id, nuevosDatos, { new: true })
+  app.put('/categorias', (req, res) => {
+    EsquemaCategoria.updateOne({nombre: req.body.nombre}, { $push: { referencias: req.body.nuevo_valor } })
       .then((registro) => {
         res.send(registro);
       })
