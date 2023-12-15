@@ -84,6 +84,10 @@ a.side_bar_link {
     max-height: 75%;
 }
 
+.espacio-boton {
+    margin-bottom: 15px;
+}
+
 /* Agregar Album -> /musica/agregar */
 
 .contenedor-registro-albums {
@@ -100,6 +104,11 @@ a.side_bar_link {
     max-width: 50%;
     max-height: 50%;
     margin: 20px 0;
+}
+
+.imagen-cada-juego {
+    max-width: 20%;
+    max-height: 20%;
 }
 
 .contenedor-registro-juegos {
