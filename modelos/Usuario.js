@@ -13,12 +13,30 @@ module.exports = Usuario;
 
 module.exports.crearUsuario = (nuevoUsuario, callback) => {
     bcryptjs.genSalt(10, (err, salt) => {
+        if (err) {
+            return callback(err);
+        }
+
         bcryptjs.hash(nuevoUsuario.contrasenha, salt, (error, hash) => {
-            // Almacenar la constraseña encriptada
-            const nuevoRecursousuario = nuevoUsuario;
-            nuevoRecursousuario.contrasenha = hash;
+            if (error) {
+                return callback(error);
+            }
+
+            // Almacenar la contraseña encriptada
+            const nuevoRecursousuario = new Usuario({
+                nombre: nuevoUsuario.nombre,
+                email: nuevoUsuario.email,
+                contrasenha: hash,
+            });
+
+            // Guardar el nuevo usuario en la base de datos
             nuevoRecursousuario.save()
-            .then((callback)); 
+                .then(savedUsuario => {
+                    callback(null, savedUsuario);
+                })
+                .catch(saveError => {
+                    callback(saveError);
+                });
         });
     });
 };

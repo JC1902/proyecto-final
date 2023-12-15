@@ -62,7 +62,7 @@ export default new Router({
     {
       path: '/videojuego/:genero',
       name: 'VideojuegoGenero',
-      component: Videojuego,
+      component: Videojuegos,
     },
     {
       path: '/videojuegos/agregar',

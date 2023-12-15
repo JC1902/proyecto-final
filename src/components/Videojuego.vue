@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="sombra" xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
+    <b-container class="sombra" xs4 :key="videojuego._id">
       <b-row>
         <b-col lg="4">
           <div>
@@ -45,12 +45,10 @@ import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/videojuego.css';
 
 const wrapper = document.createElement('div');
-const wrapperResena = document.createElement('div');
 
 // estado compartido
 const estado = {
   nota: 0,
-  resenas: [],
 };
 // crear componente en contenido
 const ComponenteCalif = Vue.extend({
@@ -80,30 +78,7 @@ const ComponenteCalif = Vue.extend({
   },
 });
 
-const ComponenteResenha = Vue.extend({
-  data() {
-    return {
-      resena: '',
-    };
-  },
-  watch: {
-    resena(nuevaResena) {
-      estado.resenas.push(nuevaResena);
-    },
-  },
-  template: `
-    <div>
-      <v-text-field
-        v-model="resenas"
-        label="Escribe tu reseña"
-        multi-line
-      ></v-text-field>
-    </div>
-  `,
-});
-
 const componente = new ComponenteCalif().$mount(wrapper);
-const componenteResenha = new ComponenteResenha().$mount(wrapperResena);
 
 export default {
   name: 'Videojuego',
@@ -146,40 +121,10 @@ export default {
             });
         });
     },
-    async resenhar() {
-      this.$swal({
-        content: componenteResenha.$el,
-        buttons: {
-          confirm: {
-            value: 0,
-          },
-        },
-      })
-        .then(() => {
-          const videojuegoId = this.$route.params.id;
-          return axios({
-            method: 'post',
-            data: {
-              resena: estado.resenas,
-            },
-            url: `http://localhost:8081/videojuegos/resena/${videojuegoId}`,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then(() => {
-              this.$swal('Gracias por dar tu opinión!', 'success');
-            })
-            .catch((error) => {
-              const mensaje = error.respuesta.data.message;
-              this.$swal('Oh no puede ser!', `${mensaje}`, 'error');
-            });
-        });
-    },
     async obtenerVideojuego() {
       return axios({
         method: 'get',
-        url: `http://localhost:8081/videojuegos/${this.$route.params.id}`,
+        url: `http://localhost:8081/videojuego/${this.$route.params.id}`,
       })
         .then((respuesta) => {
           this.videojuego = respuesta.data;
@@ -206,4 +151,3 @@ export default {
   },
 };
 </script>
-

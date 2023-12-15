@@ -9,25 +9,20 @@
 
     <v-spacer class="mb-4"></v-spacer>
 
-    <container>
-      <b-row>
-        <b-col v-for="genre in genres" :key="genre">
-          <v-btn rounded color="#AA00FF" @click="filterByGenre(genre)">
-            {{ genre }}
-          </v-btn>
-        </b-col>
-      </b-row>
-    </container>
+    <v-btn
+    color="#00B0FF"
+    v-bind:to="{name: 'AgregarJuego'}"
+    >Agrega un videojuego</v-btn>
 
     <v-spacer class="mb-4"></v-spacer>
-    <v-spacer class="mb-4"></v-spacer>
+
     <v-layout row wrap>
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
           <v-card-title primary-title class="d-flex justify-center">
             <div class="centrar-elementos">
               <div class="headline">
-                <v-btn v-bind:to="`videojuegos/${videojuego._id}`" class="espacio-boton">
+                <v-btn v-bind:to="`videojuego/${videojuego._id}`" class="espacio-boton">
                   {{ videojuego.nombre }}
                 </v-btn>
               </div>
@@ -46,12 +41,6 @@
       </v-flex>
     </v-layout>
 
-    <v-spacer class="mb-4"></v-spacer>
-
-    <v-btn
-    color="#00B0FF"
-    v-bind:to="{name: 'AgregarJuego'}"
-    >Agrega un videojuego</v-btn>
     <v-spacer class="mb-4"></v-spacer>
   </v-flex>
 </template>
@@ -127,19 +116,19 @@ export default {
       }
     },
     formatearFecha(fecha) {
-        // Crear un objeto Date con la fecha proporcionada
-        const fechaNueva = new Date(fecha);
+      // Crear un objeto Date con la fecha proporcionada
+      const fechaNueva = new Date(fecha);
 
-        // Obtener los componentes individuales de la fecha
-        const dia = fechaNueva.getDate() + 1;
-        const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
-        const año = fechaNueva.getFullYear();
+      // Obtener los componentes individuales de la fecha
+      const dia = fechaNueva.getDate() + 1;
+      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+      const año = fechaNueva.getFullYear();
 
-        // Crear una cadena con el formato día, mes, año
-        const fechaFormateada = `${dia}/${mes}/${año}`;
-        return fechaFormateada;
-      }
+      // Crear una cadena con el formato día, mes, año
+      const fechaFormateada = `${dia}/${mes}/${año}`;
+      return fechaFormateada;
+    },
   },
-}
+};
 </script>
 

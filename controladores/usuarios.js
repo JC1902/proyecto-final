@@ -36,7 +36,7 @@ module.exports.controller = (app) => {
     app.post('/usuarios/login', (req, res) => {
         if (req.body.email && req.body.password) {
             const email = req.body.email;
-            const contrasenha = req.body.contrasenha;
+            const contrasenha = req.body.password;
             Usuario.obtenerUsuarioPorEmail(email, (err, usuario) => {
                 if (!usuario) {
                     res.status(404).json({ mensaje: 'El usuario no existe' });

@@ -1,6 +1,6 @@
 const EsquemaVideojuego = require('../modelos/Videojuego');
 const Calificacion = require('../modelos/Calificacion');
-const Resena = require('../modelos/Resena');
+const EsquemaResena = require('../modelos/Resena');
 const passport = require('passport');
 
 module.exports.controller = (app) => {
@@ -34,7 +34,7 @@ module.exports.controller = (app) => {
     });
   });
 
-  app.get('/videojuegos/:id', (req, res) => {
+  app.get('/videojuego/:id', (req, res) => {
     EsquemaVideojuego.findById(req.params.id, 'nombre sinopsis anhopub desarrolladora genero imagen')
     .then((videojuego) => {
       res.send(videojuego);
@@ -42,37 +42,6 @@ module.exports.controller = (app) => {
     })
     .catch((error) => {
       console.log(error);
-    });
-  });
-
-  app.post('/videojuegos/resena/:id', (req, res) => {
-    const resena = new Resena({
-      videojuego_id: req.params.id,
-      user_id: req.params.user_id,
-      resena: req.body.resena,
-    });
-
-    resena.save(function (error, rese) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        videojuego_id: resena.videojuego_id,
-        user_id: resena.user_id,
-        resena: resena.resena,
-      });
-    });
-  });
-
-  app.get('/videojuegos/resena/:id', (req, res) => {
-    const videojuegoId = req.params.id;
-
-    Resena.find({videojuego_id: videojuegoId}, (error, resenas) => {
-      if (error) {
-        console.log(error);
-        res.status(500).send('Error al intentar obtener las reseñas');
-      }
-      res.send(resenas);
     });
   });
 }
