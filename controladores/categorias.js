@@ -3,7 +3,7 @@ const EsquemaCategoria = require('../modelos/Categoria');
 module.exports.controller = (app) => {
 
   // Agregar una nueva categoría
-  app.post('/musica/categorias', (req, res) => {
+  app.post('/categorias', (req, res) => {
     const nuevaCategoria = new EsquemaCategoria({
       nombre: req.body.nombre,
       referencias: req.body.referencias,
@@ -18,20 +18,21 @@ module.exports.controller = (app) => {
       });
   });
 
-
   // Obtener todas las categorias
-  app.get('/musica/categorias', (req, res) => {
+  app.get('/categorias', (req, res) => {
     EsquemaCategoria.find({}, 'nombre referencias')
       .then((categorias) => {
-        res.send(categorias);
+        console.log("Todo bien");
+        res.status(200).send(categorias);
       })
       .catch((error) => {
         console.error(error);
+        res.status(500).send('Error al obtener las categorías');
       });
   });
 
   // Obtener categorias especificas
-  app.get('/musica/categorias/:nombre', (req, res) => {
+  app.get('/categorias/:nombre', (req, res) => {
     EsquemaCategoria.find({ nombre: req.params.nombre }, 'nombre referencias')
       .then((categorias) => {
         res.send(categorias);
@@ -41,7 +42,7 @@ module.exports.controller = (app) => {
       });
   });
 
-  app.put('/musica/categorias/:id', (req, res) => {
+  app.put('/categorias/:id', (req, res) => {
     const { id } = req.params;
     const nuevosDatos = req.body;
 
