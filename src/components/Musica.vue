@@ -24,7 +24,7 @@
               <div class="imagen-musica">
                 <v-img :src="album.imagen"></v-img>
               </div>
-              <span class="gray--text">
+              <span class="grey--text">
                 {{ formatearFecha(album.picker) }} &middot; {{ album.genero }}
               </span>
             </div>

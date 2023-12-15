@@ -1,5 +1,6 @@
 const EsquemaVideojuego = require('../modelos/Videojuego');
 const Calificacion = require('../modelos/Calificacion');
+const Resena = require('../modelos/Resena');
 const passport = require('passport');
 
 module.exports.controller = (app) => {
@@ -24,72 +25,54 @@ module.exports.controller = (app) => {
   });
 
   app.get('/videojuegos', (req, res) => {
-    EsquemaVideojuego.find({}, 'nombre sinopsis anhopub imagen')
-    .then((error, videojuegos) => {
-        if (error) { 
-            console.log(error);
-            res.send(error);
-        } else {
-            res.send({videojuegos});
-        }
+    EsquemaVideojuego.find({}, 'nombre sinopsis anhopub genero imagen')
+    .then((videojuegos) => {
+      res.send(videojuegos);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-});
+  });
 
-  //Obtener un videojuego
-  app.get('/api/videojuegos/calif/:id', (req, res) =>{
-    const calificacion = new Rating({
+  app.get('/videojuegos/:id', (req, res) => {
+    EsquemaVideojuego.findById(req.params.id, 'nombre sinopsis anhopub desarrolladora genero imagen')
+    .then((videojuego) => {
+      res.send(videojuego);
+      console.log(videojuego);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  });
+
+  app.post('/videojuegos/resena/:id', (req, res) => {
+    const resena = new Resena({
       videojuego_id: req.params.id,
       user_id: req.params.user_id,
-      calif: req.body.calif,
+      resena: req.body.resena,
     });
 
-    calificacion.save(function(error, calif) {
-      if(error) { console.log(error); }
-
-      res.send({
-        videojuego_id: calificacion.pelicula_id,
-        user_id: calificacion.user_id,
-        calif: calificacion.calif,
-      });
-    });
-  });
-
-  //Obtiene un juego dependiendo de su genero 
-  app.get('/videojuegos/:genero', (req, res) => {
-    const genero = req.params.genero;
-  
-    EsquemaVideojuego.find({ _genero: genero }, 'nombre sinopsis anhopub imagen')
-      .then((videojuegos) => {
-        res.send({ videojuegos });
-      })
-      .catch((error) => {
+    resena.save(function (error, rese) {
+      if (error) {
         console.log(error);
-        res.status(500).send(error);
+      }
+      res.send({
+        videojuego_id: resena.videojuego_id,
+        user_id: resena.user_id,
+        resena: resena.resena,
       });
+    });
   });
 
-  //Eliminar un videojuego por id
-  app.delete('/videojuegos/:id', (req, res) => {
-    EsquemaVideojuego.deleteOne({_id: req.params.id})
-      .then((error, videojuego) => {
-        if(error){
-          console.error(error);
-          res.send(error);
-        } else {
-          res.end({estado: eliminado});
-        }
-      });
-  });
+  app.get('/videojuegos/resena/:id', (req, res) => {
+    const videojuegoId = req.params.id;
 
-  app.delete('videojuegos', (req, res) => {
-    EsquemaVideojuego.deleteMany({})
-      .then((error) => {
-        if(error) {
-          console.error(error);
-          res.send(error);
-        } else {
-          res.end({estado: eliminado});
-        }
-      });
+    Resena.find({videojuego_id: videojuegoId}, (error, resenas) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send('Error al intentar obtener las reseñas');
+      }
+      res.send(resenas);
+    });
   });
 }

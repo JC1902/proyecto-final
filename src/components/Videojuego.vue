@@ -4,11 +4,11 @@
       <b-row>
         <b-col lg="4">
           <div>
-            <img
+            <v-img
             class="sombra imagen"
             :src="videojuego.imagen"
             :width="300"
-            :radius-border="2.5">
+            :radius-border="2.5"></v-img>
           </div>
         </b-col>
         <b-col>
@@ -17,17 +17,21 @@
           </v-card-title>
           <v-card-text>
           <span class="grey--text" >
-              {{ videojuego.anhopub }} &middot; {{ videojuego.genero }}  &middot; {{ videojuego.imagen }}
+              {{ formatearFecha(videojuego.anhopub) }} &middot; {{ videojuego.genero }}
+              &middot; {{ videojuego.desarrolladora }}
             </span>
         </v-card-text>
-        <v-text class="texto" scoped>
+        <v-card-text class="texto" scoped>
           {{ videojuego.sinopsis }}
-        </v-text>
+        </v-card-text>
 
         <div>
-          <v-btn text color="purple">Calificar este videojuego</v-btn>
+          <v-btn text color="purple" @click="calificar()">Calificar</v-btn>
         </div>
-        
+
+        <div>
+          <v-btn text @click="resenhar()">Reseñar</v-btn>
+        </div>
         </b-col>
       </b-row>
     </b-container>
@@ -40,12 +44,13 @@ import Vue from 'vue';
 import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/videojuego.css';
 
-const img1 = require('@/assets/images/God_of_War.jpg');
-
 const wrapper = document.createElement('div');
+const wrapperResena = document.createElement('div');
+
 // estado compartido
 const estado = {
   nota: 0,
+  resenas: [],
 };
 // crear componente en contenido
 const ComponenteCalif = Vue.extend({
@@ -62,7 +67,12 @@ const ComponenteCalif = Vue.extend({
   template: `
     <div class="rating">
       ¿Cuál fue su expriencia juego este videojuego?
-      <star-rating v-model="calif" :show-rating="false"></star-rating>
+      <star-rating
+        v-model="calif"
+        :show-rating="false"
+        inactive-color="#B388FF"
+        active-color="#4A148C"
+      ></star-rating>
     </div>   
   `,
   components: {
@@ -70,22 +80,37 @@ const ComponenteCalif = Vue.extend({
   },
 });
 
+const ComponenteResenha = Vue.extend({
+  data() {
+    return {
+      resena: '',
+    };
+  },
+  watch: {
+    resena(nuevaResena) {
+      estado.resenas.push(nuevaResena);
+    },
+  },
+  template: `
+    <div>
+      <v-text-field
+        v-model="resenas"
+        label="Escribe tu reseña"
+        multi-line
+      ></v-text-field>
+    </div>
+  `,
+});
+
 const componente = new ComponenteCalif().$mount(wrapper);
+const componenteResenha = new ComponenteResenha().$mount(wrapperResena);
 
 export default {
   name: 'Videojuego',
   data() {
     return {
       videojuego: [],
-
-      items: [
-      {
-        src: img1,
-        group: 'God of war',
-      }
-    ]
     };
-    
   },
   mounted() {
     this.obtenerVideojuego();
@@ -107,7 +132,7 @@ export default {
             data: {
               calif: estado.nota,
             },
-            url: `/videojuego/calif/${videojuegoId}`,
+            url: `http://localhost:8081/videojuegos/calif/${videojuegoId}`,
             headers: {
               'Content-Type': 'application/json',
             },
@@ -121,17 +146,62 @@ export default {
             });
         });
     },
+    async resenhar() {
+      this.$swal({
+        content: componenteResenha.$el,
+        buttons: {
+          confirm: {
+            value: 0,
+          },
+        },
+      })
+        .then(() => {
+          const videojuegoId = this.$route.params.id;
+          return axios({
+            method: 'post',
+            data: {
+              resena: estado.resenas,
+            },
+            url: `http://localhost:8081/videojuegos/resena/${videojuegoId}`,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(() => {
+              this.$swal('Gracias por dar tu opinión!', 'success');
+            })
+            .catch((error) => {
+              const mensaje = error.respuesta.data.message;
+              this.$swal('Oh no puede ser!', `${mensaje}`, 'error');
+            });
+        });
+    },
     async obtenerVideojuego() {
       return axios({
         method: 'get',
-        url: `/videojuego/${this.route.params.id}`,
+        url: `http://localhost:8081/videojuegos/${this.$route.params.id}`,
       })
         .then((respuesta) => {
           this.videojuego = respuesta.data;
+          // eslint-disable-next-line no-console
+          console.log(this.videojuego);
         })
         .catch(() => {
 
         });
+    },
+    formatearFecha(fecha) {
+      // Crear un objeto Date con la fecha proporcionada
+      const fechaNueva = new Date(fecha);
+
+      // Obtener los componentes individuales de la fecha
+      const dia = fechaNueva.getDate() + 1;
+      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+      const año = fechaNueva.getFullYear();
+
+      // Crear una cadena con el formato día, mes, año
+      const fechaFormateada = `${dia}/${mes}/${año}`;
+      return fechaFormateada;
     },
   },
 };
