@@ -33,15 +33,14 @@ module.exports.controller = (app) => {
     });
   });
 
-  app.get('/videojuego/:id', (req, res) => {
+  app.get('/videojuegos/:id', (req, res) => {
     EsquemaVideojuego.findById(req.params.id, 'nombre sinopsis anhopub desarrolladora genero imagen')
     .then((videojuego) => {
       res.send(videojuego);
-      console.log(this.videojuego);
+      console.log(videojuego);
     })
     .catch((error) => {
       console.log(error);
-      console.log(this.videojuego);
     });
   });
 }

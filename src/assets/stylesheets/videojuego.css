@@ -1,10 +1,4 @@
-.card,
-.xs4,
-.v-card {
-    flex-basis: 55.555;
-    height: 100% !important;
-    max-width: 55% !important;
-}
+
 .texto{
     margin-right: 2rem;
     text-align: justify;

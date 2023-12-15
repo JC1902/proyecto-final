@@ -15,7 +15,7 @@
           <v-card-title primary-title class="d-flex justify-center">
             <div class="centrar-elementos">
               <div class="headline">
-                <v-btn v-bind:to="`videojuego/${videojuego._id}`" class="espacio-boton">
+                <v-btn v-bind:to="`videojuegos/${videojuego._id}`" class="espacio-boton">
                   {{ videojuego.nombre }}
                 </v-btn>
               </div>

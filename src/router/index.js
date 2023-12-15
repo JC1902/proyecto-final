@@ -53,9 +53,9 @@ export default new Router({
       path: '/videojuegos',
       name: 'Videojuegos',
       component: Videojuegos,
-    },    
+    },
     {
-      path: '/videojuego/:id',
+      path: '/videojuegos/:id',
       name: 'Videojuego',
       component: Videojuego,
     },

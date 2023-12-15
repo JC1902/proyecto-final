@@ -39,7 +39,7 @@
         <v-card-title primary-title class="d-flex justify-center">
           <div class="headline font-weight-bold">Videojuegos</div>
         </v-card-title>
-        <img src="../assets/images/icono-juegos.png" class="imagen-incio">
+        <img src="../assets/images/icono-juegos.png" class="imagen-inicio">
         <v-card-text>
           <v-btn
             rounded
@@ -76,7 +76,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import '../assets/stylesheets/main.css';
 
 export default {
@@ -85,49 +84,6 @@ export default {
     return {
       peliculas: [],
     };
-  },
-  mounted() {
-    this.obtenerPeliculas();
-  },
-  methods: {
-    async obtenerPeliculas() {
-      const token = window.localStorage.getItem('auth');
-      return axios({
-        method: 'get',
-        url: 'http://localhost:8081/peliculas',
-        headers: {
-          Authorization: `JWT ${token}`,
-          'Çontent-Type': 'application/json',
-        },
-      })
-        .then((respuesta) => {
-          this.peliculas = respuesta.data.albumes;
-          this.current_user = respuesta.data.current_user;
-        })
-        .catch(() => {
-        });
-    },
-    async eliminarPelicula(_id) {
-      return axios({
-        method: 'delete',
-        url: `http://localhost:8081/peliculas/${_id}`,
-      })
-        .then(() => {
-          this.obtenerPeliculas();
-        })
-        .catch(() => {
-
-        });
-    },
-    async eliminarPeliculas() {
-      return axios({
-        method: 'delete',
-        url: 'http://localhost:8081/peliculas',
-      })
-        .then(() => {
-          this.obtenerPeliculas();
-        });
-    },
   },
 };
 </script>

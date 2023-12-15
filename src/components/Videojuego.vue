@@ -4,40 +4,30 @@
       <b-row>
         <b-col lg="4">
           <div>
-            <img
+            <v-img
             class="sombra imagen"
-            :src="items[0].src"
+            :src="videojuego.imagen"
             :width="300"
-            :radius-border="2.5">
+            :radius-border="2.5"></v-img>
           </div>
         </b-col>
         <b-col>
-          <v-card-title primary-title :dislpay="inherit">
-            God of war 
+          <v-card-title primary-title>
+            {{ videojuego.nombre }}
           </v-card-title>
           <v-card-text>
           <span class="grey--text" >
-              2018 &middot; Accion/Aventura  &middot; Santa Monica Studios
+              {{ formatearFecha(videojuego.anhopub) }} &middot; {{ videojuego.genero }}
+              &middot; {{ videojuego.desarrolladora }}
             </span>
         </v-card-text>
-        <v-text class="texto" scoped>
-          Kratos ha dejado atrás su venganza contra 
-          los dioses del Olimpo y vive ahora como un 
-          hombre en los dominios de los dioses y 
-          monstruos nórdicos. En este mundo cruel e 
-          implacable debe luchar para sobrevivir… y 
-          enseñar a su hijo a hacerlo también. 
-          Aclamado reboot de la franquicia de videojuegos 
-          "God of War", inspirado por "The Last of Us" 
-          y centrado en su vertiente narrativa. 
-          Entre sus particularidades, está diseñado 
-          simulando un plano secuencia sin cortes.
-        </v-text>
+        <v-card-text class="texto" scoped>
+          {{ videojuego.sinopsis }}
+        </v-card-text>
 
         <div>
-          <v-btn text color="purple">Calificar este videojuego</v-btn>
+          <v-btn text color="purple" @click="calificar()">Calificar</v-btn>
         </div>
-        
         </b-col>
       </b-row>
     </b-container>
@@ -49,8 +39,6 @@ import axios from 'axios';
 import Vue from 'vue';
 import StarRating from 'vue-star-rating';
 import '../assets/stylesheets/videojuego.css';
-
-const img1 = require('@/assets/images/God_of_War.jpg');
 
 const wrapper = document.createElement('div');
 // estado compartido
@@ -87,15 +75,7 @@ export default {
   data() {
     return {
       videojuego: [],
-
-      items: [
-      {
-        src: img1,
-        group: 'God of war',
-      }
-    ]
     };
-    
   },
   mounted() {
     this.obtenerVideojuego();
@@ -117,7 +97,7 @@ export default {
             data: {
               calif: estado.nota,
             },
-            url: `/videojuego/calif/${videojuegoId}`,
+            url: `http://localhost:8081/videojuego/calif/${videojuegoId}`,
             headers: {
               'Content-Type': 'application/json',
             },
@@ -134,14 +114,29 @@ export default {
     async obtenerVideojuego() {
       return axios({
         method: 'get',
-        url: `/videojuego/${this.$route.params.id}`,
+        url: `http://localhost:8081/videojuegos/${this.$route.params.id}`,
       })
         .then((respuesta) => {
           this.videojuego = respuesta.data;
+          // eslint-disable-next-line no-console
+          console.log(this.videojuego);
         })
         .catch(() => {
 
         });
+    },
+    formatearFecha(fecha) {
+      // Crear un objeto Date con la fecha proporcionada
+      const fechaNueva = new Date(fecha);
+
+      // Obtener los componentes individuales de la fecha
+      const dia = fechaNueva.getDate() + 1;
+      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+      const año = fechaNueva.getFullYear();
+
+      // Crear una cadena con el formato día, mes, año
+      const fechaFormateada = `${dia}/${mes}/${año}`;
+      return fechaFormateada;
     },
   },
 };
