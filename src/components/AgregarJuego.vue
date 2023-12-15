@@ -71,6 +71,8 @@ export default {
       v => !!v || 'Género de película requerido',
       v => (v && v.length <= 80) || 'Género debe ser menor o igual a 80 caracteres',
     ],
+    picker: (
+      new Date(Date.now() - (new Date().getTimezoneOffset() * 60000))).toISOString().slice(0, 10),
   }),
 
   methods: {

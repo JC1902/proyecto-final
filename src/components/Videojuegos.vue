@@ -71,6 +71,8 @@ export default {
         },
       ],
       videojuegos: [],
+      genres: ['Acción/Aventuras', 'Fromsoftware', 'SantaMonica', 'Hack n slash', 'Shooter', 'All'],
+
     };
   },
   mounted() {
@@ -91,19 +93,42 @@ export default {
         .catch(() => {
         });
     },
-    formatearFecha(fecha) {
-      // Crear un objeto Date con la fecha proporcionada
-      const fechaNueva = new Date(fecha);
-
-      // Obtener los componentes individuales de la fecha
-      const dia = fechaNueva.getDate() + 1;
-      const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
-      const año = fechaNueva.getFullYear();
-
-      // Crear una cadena con el formato día, mes, año
-      const fechaFormateada = `${dia}/${mes}/${año}`;
-      return fechaFormateada;
+    filterByGenre(genre) {
+      if (genre === 'All') {
+        // If 'All' is selected, fetch all video games
+        this.obtenerVideojuegos();
+      } else {
+        // Fetch video games based on the selected genre
+        axios({
+          method: 'get',
+          url: `http://localhost:8081/videojuegos/genero/${genre}`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((respuesta) => {
+            this.videojuegos = respuesta.data.videojuegos;
+            this.$router.push({ name: 'Videojuegos' });
+          })
+          .catch(() => {
+            // Handle error
+          });
+      }
     },
+    formatearFecha(fecha) {
+        // Crear un objeto Date con la fecha proporcionada
+        const fechaNueva = new Date(fecha);
+
+        // Obtener los componentes individuales de la fecha
+        const dia = fechaNueva.getDate() + 1;
+        const mes = fechaNueva.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+        const año = fechaNueva.getFullYear();
+
+        // Crear una cadena con el formato día, mes, año
+        const fechaFormateada = `${dia}/${mes}/${año}`;
+        return fechaFormateada;
+      }
   },
-};
+}
 </script>
+

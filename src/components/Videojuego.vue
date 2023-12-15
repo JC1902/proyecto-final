@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="sombra">
+    <b-container class="sombra" xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
       <b-row>
         <b-col lg="4">
           <div>
@@ -12,7 +12,7 @@
           </div>
         </b-col>
         <b-col>
-          <v-card-title primary-title>
+          <v-card-title primary-title :dislpay="inherit">
             {{ videojuego.nombre }}
           </v-card-title>
           <v-card-text>
