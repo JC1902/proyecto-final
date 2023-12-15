@@ -9,6 +9,13 @@
 
     <v-spacer class="mb-4"></v-spacer>
 
+    <v-btn
+    color="#00B0FF"
+    v-bind:to="{name: 'AgregarJuego'}"
+    >Agrega un videojuego</v-btn>
+
+    <v-spacer class="mb-4"></v-spacer>
+
     <v-layout row wrap>
       <v-flex xs4 v-for="videojuego in videojuegos" :key="videojuego._id">
         <v-card>
@@ -35,11 +42,6 @@
     </v-layout>
 
     <v-spacer class="mb-4"></v-spacer>
-
-    <v-btn
-    color="#00B0FF"
-    v-bind:to="{name: 'AgregarJuego'}"
-    >Agrega un videojuego</v-btn>
   </v-flex>
 </template>
 

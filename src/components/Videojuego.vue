@@ -94,7 +94,7 @@ const ComponenteResenha = Vue.extend({
   template: `
     <div>
       <v-text-field
-        v-model="resenas"
+        v-model="resena"
         label="Escribe tu reseña"
         multi-line
       ></v-text-field>
@@ -168,7 +168,7 @@ export default {
             },
           })
             .then(() => {
-              this.$swal('Gracias por dar tu opinión!', 'success');
+              this.$swal('Ma-ra-vi-llo-so!', 'Gracias por darnos tu opinión', 'success');
             })
             .catch((error) => {
               const mensaje = error.respuesta.data.message;

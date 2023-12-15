@@ -3,7 +3,7 @@ const Esquema = mongoose.Schema;
 const EsquemaResena = new Esquema ({
     videojuego_id: String,
     user_id: String,
-    resena: String,
+    resena: [String],
 });
 
 const Resena = mongoose.model('Resena', EsquemaResena);

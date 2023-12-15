@@ -1,6 +1,6 @@
 const EsquemaVideojuego = require('../modelos/Videojuego');
 const Calificacion = require('../modelos/Calificacion');
-const Resena = require('../modelos/Resena');
+const EsquemaResena = require('../modelos/Resena');
 const passport = require('passport');
 
 module.exports.controller = (app) => {
@@ -46,21 +46,18 @@ module.exports.controller = (app) => {
   });
 
   app.post('/videojuegos/resena/:id', (req, res) => {
-    const resena = new Resena({
+    const resena = new EsquemaResena({
       videojuego_id: req.params.id,
       user_id: req.params.user_id,
       resena: req.body.resena,
     });
 
-    resena.save(function (error, rese) {
+    resena.save()
+    .then((error, rese) => {
       if (error) {
         console.log(error);
       }
-      res.send({
-        videojuego_id: resena.videojuego_id,
-        user_id: resena.user_id,
-        resena: resena.resena,
-      });
+      res.send(resena);
     });
   });
 
